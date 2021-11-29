@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      Play #<%= @the_play.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/plays">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_play/<%= @the_play.id %>">
+          Delete play
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_play.user_id %>
+      </dd>
+
+      <dt>
+        Correct sum
+      </dt>
+      <dd>
+        <%= @the_play.correct_sum %>
+      </dd>
+
+      <dt>
+        Incorrect sum
+      </dt>
+      <dd>
+        <%= @the_play.incorrect_sum %>
+      </dd>
+
+      <dt>
+        Result
+      </dt>
+      <dd>
+        <%= @the_play.result %>
+      </dd>
+
+      <dt>
+        Draws count
+      </dt>
+      <dd>
+        <%= @the_play.draws_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_play.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_play.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit play
+    </h2>
+
+    <form action="/modify_play/<%= @the_play.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_play.user_id %>">
+      </div>
+
+      <div>
+        <label for="correct_sum_box">
+          Correct sum
+        </label>
+
+        <input type="text" id="correct_sum_box" name="query_correct_sum" value="<%= @the_play.correct_sum %>">
+      </div>
+
+      <div>
+        <label for="incorrect_sum_box">
+          Incorrect sum
+        </label>
+
+        <input type="text" id="incorrect_sum_box" name="query_incorrect_sum" value="<%= @the_play.incorrect_sum %>">
+      </div>
+
+      <div>
+        <label for="result_box">
+          Result
+        </label>
+
+        <input type="text" id="result_box" name="query_result" value="<%= @the_play.result %>">
+      </div>
+
+      <div>
+        <label for="draws_count_box">
+          Draws count
+        </label>
+
+        <input type="text" id="draws_count_box" name="query_draws_count" value="<%= @the_play.draws_count %>">
+      </div>
+
+      <button>
+        Update play
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

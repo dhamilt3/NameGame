@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Draw #<%= @the_draw.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/draws">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_draw/<%= @the_draw.id %>">
+          Delete draw
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Roster
+      </dt>
+      <dd>
+        <%= @the_draw.roster_id %>
+      </dd>
+
+      <dt>
+        Name match
+      </dt>
+      <dd>
+        <%= @the_draw.name_match %>
+      </dd>
+
+      <dt>
+        Name attempt
+      </dt>
+      <dd>
+        <%= @the_draw.name_attempt %>
+      </dd>
+
+      <dt>
+        Play
+      </dt>
+      <dd>
+        <%= @the_draw.play_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_draw.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_draw.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit draw
+    </h2>
+
+    <form action="/modify_draw/<%= @the_draw.id %>"  method="post" >
+      <div>
+        <label for="roster_id_box">
+          Roster
+        </label>
+
+        <input type="text" id="roster_id_box" name="query_roster_id" value="<%= @the_draw.roster_id %>">
+      </div>
+
+      <div>
+        <label for="name_match_box">
+          Name match
+        </label>
+
+        <input type="text" id="name_match_box" name="query_name_match" value="<%= @the_draw.name_match %>">
+      </div>
+
+      <div>
+        <label for="name_attempt_box">
+          Name attempt
+        </label>
+
+        <input type="text" id="name_attempt_box" name="query_name_attempt" value="<%= @the_draw.name_attempt %>">
+      </div>
+
+      <div>
+        <label for="play_id_box">
+          Play
+        </label>
+
+        <input type="text" id="play_id_box" name="query_play_id" value="<%= @the_draw.play_id %>">
+      </div>
+
+      <button>
+        Update draw
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

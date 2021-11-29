@@ -1,0 +1,150 @@
+<div>
+  <div>
+    <h1>
+      List of all plays
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new play
+    </h2>
+
+    <form action="/insert_play" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="correct_sum_box">
+          Correct sum
+        </label>
+
+        <input type="text" id="correct_sum_box" name="query_correct_sum">
+      </div>
+
+      <div>
+        <label for="incorrect_sum_box">
+          Incorrect sum
+        </label>
+
+        <input type="text" id="incorrect_sum_box" name="query_incorrect_sum">
+      </div>
+
+      <div>
+        <label for="result_box">
+          Result
+        </label>
+
+        <input type="text" id="result_box" name="query_result">
+      </div>
+
+      <div>
+        <label for="draws_count_box">
+          Draws count
+        </label>
+
+        <input type="text" id="draws_count_box" name="query_draws_count">
+      </div>
+
+      <button>
+        Create play
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Correct sum
+        </th>
+
+        <th>
+          Incorrect sum
+        </th>
+
+        <th>
+          Result
+        </th>
+
+        <th>
+          Draws count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_plays.each do |a_play| %>
+      <tr>
+        <td>
+          <%= a_play.id %>
+        </td>
+
+        <td>
+          <%= a_play.user_id %>
+        </td>
+
+        <td>
+          <%= a_play.correct_sum %>
+        </td>
+
+        <td>
+          <%= a_play.incorrect_sum %>
+        </td>
+
+        <td>
+          <%= a_play.result %>
+        </td>
+
+        <td>
+          <%= a_play.draws_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_play.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_play.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/plays/<%= a_play.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

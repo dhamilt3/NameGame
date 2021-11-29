@@ -1,0 +1,191 @@
+<div>
+  <div>
+    <h1>
+      Roster #<%= @the_roster.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/rosters">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_roster/<%= @the_roster.id %>">
+          Delete roster
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Badge number
+      </dt>
+      <dd>
+        <%= @the_roster.badge_number %>
+      </dd>
+
+      <dt>
+        First name
+      </dt>
+      <dd>
+        <%= @the_roster.first_name %>
+      </dd>
+
+      <dt>
+        Last name
+      </dt>
+      <dd>
+        <%= @the_roster.last_name %>
+      </dd>
+
+      <dt>
+        Preferred name
+      </dt>
+      <dd>
+        <%= @the_roster.preferred_name %>
+      </dd>
+
+      <dt>
+        Shift
+      </dt>
+      <dd>
+        <%= @the_roster.shift %>
+      </dd>
+
+      <dt>
+        Department
+      </dt>
+      <dd>
+        <%= @the_roster.department %>
+      </dd>
+
+      <dt>
+        Role
+      </dt>
+      <dd>
+        <%= @the_roster.role %>
+      </dd>
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <%= @the_roster.image %>
+      </dd>
+
+      <dt>
+        Draws count
+      </dt>
+      <dd>
+        <%= @the_roster.draws_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_roster.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_roster.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit roster
+    </h2>
+
+    <form action="/modify_roster/<%= @the_roster.id %>"  method="post" >
+      <div>
+        <label for="badge_number_box">
+          Badge number
+        </label>
+
+        <input type="text" id="badge_number_box" name="query_badge_number" value="<%= @the_roster.badge_number %>">
+      </div>
+
+      <div>
+        <label for="first_name_box">
+          First name
+        </label>
+
+        <input type="text" id="first_name_box" name="query_first_name" value="<%= @the_roster.first_name %>">
+      </div>
+
+      <div>
+        <label for="last_name_box">
+          Last name
+        </label>
+
+        <input type="text" id="last_name_box" name="query_last_name" value="<%= @the_roster.last_name %>">
+      </div>
+
+      <div>
+        <label for="preferred_name_box">
+          Preferred name
+        </label>
+
+        <input type="text" id="preferred_name_box" name="query_preferred_name" value="<%= @the_roster.preferred_name %>">
+      </div>
+
+      <div>
+        <label for="shift_box">
+          Shift
+        </label>
+
+        <input type="text" id="shift_box" name="query_shift" value="<%= @the_roster.shift %>">
+      </div>
+
+      <div>
+        <label for="department_box">
+          Department
+        </label>
+
+        <input type="text" id="department_box" name="query_department" value="<%= @the_roster.department %>">
+      </div>
+
+      <div>
+        <label for="role_box">
+          Role
+        </label>
+
+        <input type="text" id="role_box" name="query_role" value="<%= @the_roster.role %>">
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image" value="<%= @the_roster.image %>">
+      </div>
+
+      <div>
+        <label for="draws_count_box">
+          Draws count
+        </label>
+
+        <input type="text" id="draws_count_box" name="query_draws_count" value="<%= @the_roster.draws_count %>">
+      </div>
+
+      <button>
+        Update roster
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

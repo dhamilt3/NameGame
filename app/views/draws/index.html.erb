@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all draws
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new draw
+    </h2>
+
+    <form action="/insert_draw" method="post">
+      <div>
+        <label for="roster_id_box">
+          Roster
+        </label>
+
+        <input type="text" id="roster_id_box" name="query_roster_id">
+      </div>
+
+      <div>
+        <label for="name_match_box">
+          Name match
+        </label>
+
+        <input type="text" id="name_match_box" name="query_name_match">
+      </div>
+
+      <div>
+        <label for="name_attempt_box">
+          Name attempt
+        </label>
+
+        <input type="text" id="name_attempt_box" name="query_name_attempt">
+      </div>
+
+      <div>
+        <label for="play_id_box">
+          Play
+        </label>
+
+        <input type="text" id="play_id_box" name="query_play_id">
+      </div>
+
+      <button>
+        Create draw
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Roster
+        </th>
+
+        <th>
+          Name match
+        </th>
+
+        <th>
+          Name attempt
+        </th>
+
+        <th>
+          Play
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_draws.each do |a_draw| %>
+      <tr>
+        <td>
+          <%= a_draw.id %>
+        </td>
+
+        <td>
+          <%= a_draw.roster_id %>
+        </td>
+
+        <td>
+          <%= a_draw.name_match %>
+        </td>
+
+        <td>
+          <%= a_draw.name_attempt %>
+        </td>
+
+        <td>
+          <%= a_draw.play_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_draw.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_draw.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/draws/<%= a_draw.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
