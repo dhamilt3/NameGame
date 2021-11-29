@@ -15,4 +15,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def home
+    render(:template => "misc/home.html.erb")
+  end
+
+
 end

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  #general information
+
+  get("/", {:controller => "application", :action => "home" })
+
+
+
 
 
   # Routes for the Draw resource:
@@ -9,7 +15,6 @@ Rails.application.routes.draw do
           
   # READ
   get("/draws", { :controller => "draws", :action => "index" })
-  
   get("/draws/:path_id", { :controller => "draws", :action => "show" })
   
   # UPDATE
@@ -28,11 +33,9 @@ Rails.application.routes.draw do
           
   # READ
   get("/plays", { :controller => "plays", :action => "index" })
-  
   get("/plays/:path_id", { :controller => "plays", :action => "show" })
   
   # UPDATE
-  
   post("/modify_play/:path_id", { :controller => "plays", :action => "update" })
   
   # DELETE
