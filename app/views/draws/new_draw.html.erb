@@ -1,14 +1,24 @@
+<h1>Current_Play <%=session.fetch("play_id")%></h1>
 <h1>Draw Number 1/5 </h1>
 <div>
-  <img src="<%=@photo%>"
+  <img src="<%=@photo%>">
 </div>
-
-
 
 <div>
   <form>
     <label>Name</label>
     <input placeholder="who is this?">
+    <input type="hidden", >
+
+
     <button>Submit</button>
   </form>
+</div>
+
+<div>
+  Current User: <%=@current_user.id%>
+</div>
+
+<div>
+  Current Play: <%=@current_play%>
 </div>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # Routes for the Draw resource:----------------------------
 
   # CREATE
-  get("/new_draw_start", {:controller => "draws", :action => "new_draw_start"})
+  get("/new_draw", {:controller => "draws", :action => "new_draw"})
   post("/insert_draw", { :controller => "draws", :action => "create" })     
   # READ
   get("/draws", { :controller => "draws", :action => "index" })
@@ -21,8 +21,9 @@ Rails.application.routes.draw do
   # Routes for the Play resource:------------------------------------------
 
   # CREATE
-    get("/play", {:controller => "plays", :action => "new_play"})
-    post("/insert_play", { :controller => "plays", :action => "create" })   
+    get("/play", {:controller => "plays", :action => "home"}) #this has been reviewed
+    get("/new_play", {:controller => "plays", :action => "new_play"})
+ 
     # READ
     get("/plays", { :controller => "plays", :action => "index" })
     get("/plays/:path_id", { :controller => "plays", :action => "show" })

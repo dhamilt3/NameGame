@@ -1,12 +1,15 @@
 class DrawsController < ApplicationController
   
-  def new_draw_start
-    @draw_id = Roster.all.sample
-    @photo = @draw_id.image
+  def new_draw
+    draw_id = Roster.all.sample
+    @photo = draw_id.image
+
     the_draw = Draw.new
-    the_draw.roster_id = @draw_id.id
-    the_draw.name_match = @draw_id.preferred_name
+    the_draw.roster_id = draw_id.id
+    the_draw.name_match = draw_id.preferred_name
+    the_draw.play_id = @current_play
     the_draw.save
+    
     render({:template => "draws/new_draw.html.erb"})
   end
   
