@@ -2,17 +2,14 @@ class RostersController < ApplicationController
   def index
     matching_rosters = Roster.all
     @list_of_rosters = matching_rosters.order({ :created_at => :desc })
-    render({ :template => "rosters/index.html.erb" })
+    render({ :template => "roster/index.html.erb" })
   end
 
   def show
     the_id = params.fetch("path_id")
-
     matching_rosters = Roster.where({ :id => the_id })
-
     @the_roster = matching_rosters.at(0)
-
-    render({ :template => "rosters/show.html.erb" })
+    render({ :template => "roster/show.html.erb" })
   end
 
   def create
@@ -25,13 +22,12 @@ class RostersController < ApplicationController
     the_roster.department = params.fetch("query_department")
     the_roster.role = params.fetch("query_role")
     the_roster.image = params.fetch("query_image")
-    the_roster.draws_count = params.fetch("query_draws_count")
 
     if the_roster.valid?
       the_roster.save
-      redirect_to("/rosters", { :notice => "Roster created successfully." })
+      redirect_to("/roster", { :notice => "Roster created successfully." })
     else
-      redirect_to("/rosters", { :notice => "Roster failed to create successfully." })
+      redirect_to("/roster", { :notice => "Roster failed to create successfully." })
     end
   end
 
@@ -62,6 +58,6 @@ class RostersController < ApplicationController
 
     the_roster.destroy
 
-    redirect_to("/rosters", { :notice => "Roster deleted successfully."} )
+    redirect_to("/roster", { :notice => "Roster deleted successfully."} )
   end
 end

@@ -1,20 +1,19 @@
 class PlaysController < ApplicationController
   def index
     matching_plays = Play.all
-
     @list_of_plays = matching_plays.order({ :created_at => :desc })
-
     render({ :template => "plays/index.html.erb" })
   end
 
   def show
     the_id = params.fetch("path_id")
-
     matching_plays = Play.where({ :id => the_id })
-
     @the_play = matching_plays.at(0)
-
     render({ :template => "plays/show.html.erb" })
+  end
+
+  def new_play
+    render({:template => "plays/new_play.html.erb"})
   end
 
   def create
