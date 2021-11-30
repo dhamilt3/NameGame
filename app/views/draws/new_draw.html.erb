@@ -5,12 +5,10 @@
 </div>
 
 <div>
-  <form>
-    <label>Name</label>
-    <input placeholder="who is this?">
-    <input type="hidden", >
-
-
+  <form action="/draw_result">
+    <label for="query_answer">Name</label>
+    <input id="query_answer" placeholder="who is this?" name="answer">
+    <input type="hidden" id="query_draw" value="<%=@draw_record.preferred_name%>" name="draw_solution">
     <button>Submit</button>
   </form>
 </div>
@@ -20,5 +18,5 @@
 </div>
 
 <div>
-  Current Play: <%=@current_play%>
+  Current Play: <%=session.fetch("play_id")%>
 </div>

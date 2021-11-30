@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   # Routes for the Draw resource:----------------------------
 
   # CREATE
-  get("/new_draw", {:controller => "draws", :action => "new_draw"})
-  post("/insert_draw", { :controller => "draws", :action => "create" })     
+  get("/new_draw", {:controller => "draws", :action => "new_draw"})       
+  get("/draw_result", {:controller => "draws", :action => "draw_result"})
+
+
   # READ
   get("/draws", { :controller => "draws", :action => "index" })
   get("/draws/:path_id", { :controller => "draws", :action => "show" })
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_draw/:path_id", { :controller => "draws", :action => "destroy" })
 
+  #not currently in use:
+  # post("/insert_draw", { :controller => "draws", :action => "create" })  
  
 
   # Routes for the Play resource:------------------------------------------

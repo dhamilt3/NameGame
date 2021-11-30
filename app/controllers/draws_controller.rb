@@ -1,18 +1,34 @@
 class DrawsController < ApplicationController
   
   def new_draw
-    draw_id = Roster.all.sample
-    @photo = draw_id.image
+    draw_id = Roster.all.sample   #sample the database
+    @photo = draw_id.image        #extract a photo from the sample
+    @draw_id = draw_id.id         #extract the draw_id from the sample
+    @draw_record = Roster.all.where({:id => @draw_id}).at(0)
+      if draw_id.draws_count == nil
+        @number = 1
+      else  
+        @number= draw_id.draws_count.to_i + 1   #create a variable of "draws_count" + 1
+      end
+    draw_id.draws_count = @number      #update the draws count
+    draw_id.save
 
-    the_draw = Draw.new
-    the_draw.roster_id = draw_id.id
-    the_draw.name_match = draw_id.preferred_name
-    the_draw.play_id = @current_play
-    the_draw.save
-    
+    the_draw = Draw.new                               #create a new draw
+    the_draw.roster_id = draw_id.id                   #set field
+    the_draw.name_match = draw_id.preferred_name      #set field
+    the_draw.play_id = session.fetch("play_id")       #set field
+    the_draw.save                                     #save the record
+
     render({:template => "draws/new_draw.html.erb"})
   end
   
+  def draw_result
+    draw_solution = params.fetch("draw_solution")
+    @draw_solution = Roster.all.where({:id => draw_solution}).at(0)
+    @answer = params.fetch("answer")
+    render({:template => "draws/draw_result.html.erb"})
+  end
+
   
   
   def index
