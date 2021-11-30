@@ -3,10 +3,10 @@
 </div>
 
 <hr>
-
+<%if @current_user.present?%>
 <div>
   <div>
-    <h2>Add a new roster</h2>
+    <h2>Add a new roster member</h2>
 
     <form action="/insert_roster" method="post">
       
@@ -64,6 +64,8 @@
     </form>
   </div>
 </div>
+<%else%>
+<%end%>
 
 <hr>
 <div>
