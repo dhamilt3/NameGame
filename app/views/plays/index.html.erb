@@ -105,42 +105,15 @@
 
       <% @list_of_plays.each do |a_play| %>
       <tr>
-        <td>
-          <%= a_play.id %>
-        </td>
-
-        <td>
-          <%= a_play.user_id %>
-        </td>
-
-        <td>
-          <%= a_play.correct_sum %>
-        </td>
-
-        <td>
-          <%= a_play.incorrect_sum %>
-        </td>
-
-        <td>
-          <%= a_play.result %>
-        </td>
-
-        <td>
-          <%= a_play.draws_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_play.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_play.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/plays/<%= a_play.id %>">
-            Show details
-          </a>
-        </td>
+        <td><%= a_play.id %></td>
+        <td><%= a_play.user_id %></td>
+        <td><%= a_play.correct_sum %></td>
+        <td><%= a_play.incorrect_sum %></td>
+        <td><%= a_play.result %></td>
+        <td><%= a_play.draws_count %></td>
+        <td><%= time_ago_in_words(a_play.created_at) %> ago</td>
+        <td><%= time_ago_in_words(a_play.updated_at) %> ago</td>
+        <td><a href="/plays/<%= a_play.id %>">Show details</a></td>
       </tr>
       <% end %>
     </table>

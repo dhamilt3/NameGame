@@ -44,8 +44,6 @@ class UserAuthenticationController < ApplicationController
     @user.first_name = params.fetch("query_first_name")
     @user.last_name = params.fetch("query_last_name")
     @user.badge_number = params.fetch("query_badge_number")
-    @user.plays_count = params.fetch("query_plays_count")
-
     save_status = @user.save
 
     if save_status == true

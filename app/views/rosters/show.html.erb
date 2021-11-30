@@ -6,9 +6,7 @@
 
     <div>
       <div>
-        <a href="/rosters">
-          Go back
-        </a>
+        <a href="/roster">Go back</a>
       </div>
 
       <div>
@@ -19,12 +17,12 @@
     </div>
 
     <dl>
-      <dt>
+      <%# <dt>
         Badge number
       </dt>
       <dd>
         <%= @the_roster.badge_number %>
-      </dd>
+      <%# </dd> %>
 
       <dt>
         First name
@@ -72,15 +70,15 @@
         Image
       </dt>
       <dd>
-        <%= @the_roster.image %>
+        <img src="<%= @the_roster.image %>">
       </dd>
 
-      <dt>
+      <%# <dt>
         Draws count
       </dt>
       <dd>
-        <%= @the_roster.draws_count %>
-      </dd>
+        <%= @the_roster.draws_count%>
+      <%# </dd> %>
 
       <dt>
         Created at
@@ -134,56 +132,36 @@
       </div>
 
       <div>
-        <label for="preferred_name_box">
-          Preferred name
-        </label>
-
+        <label for="preferred_name_box">Preferred name</label>
         <input type="text" id="preferred_name_box" name="query_preferred_name" value="<%= @the_roster.preferred_name %>">
       </div>
 
       <div>
-        <label for="shift_box">
-          Shift
-        </label>
-
+        <label for="shift_box">Shift</label>
         <input type="text" id="shift_box" name="query_shift" value="<%= @the_roster.shift %>">
       </div>
 
       <div>
-        <label for="department_box">
-          Department
-        </label>
-
+        <label for="department_box">Department</label>
         <input type="text" id="department_box" name="query_department" value="<%= @the_roster.department %>">
       </div>
 
       <div>
-        <label for="role_box">
-          Role
-        </label>
-
+        <label for="role_box">Role</label>
         <input type="text" id="role_box" name="query_role" value="<%= @the_roster.role %>">
       </div>
 
       <div>
-        <label for="image_box">
-          Image
-        </label>
-
+        <label for="image_box">Image</label>
         <input type="text" id="image_box" name="query_image" value="<%= @the_roster.image %>">
       </div>
 
       <div>
-        <label for="draws_count_box">
-          Draws count
-        </label>
-
+        <label for="draws_count_box">Draws count</label>
         <input type="text" id="draws_count_box" name="query_draws_count" value="<%= @the_roster.draws_count %>">
       </div>
 
-      <button>
-        Update roster
-      </button>
+      <button>Update roster</button>
     </form>
   </div>
 </div>

@@ -1,1 +1,6 @@
-<h1>Welcome to NameGame </h1>
+<h1>Welcome to NameGame 
+  <%if @current_user == nil%>
+  <%else%>
+  <%=@current_user.first_name%> 
+  <%end%>
+  </h1>

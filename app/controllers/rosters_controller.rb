@@ -1,9 +1,7 @@
 class RostersController < ApplicationController
   def index
     matching_rosters = Roster.all
-
     @list_of_rosters = matching_rosters.order({ :created_at => :desc })
-
     render({ :template => "rosters/index.html.erb" })
   end
 
@@ -40,7 +38,6 @@ class RostersController < ApplicationController
   def update
     the_id = params.fetch("path_id")
     the_roster = Roster.where({ :id => the_id }).at(0)
-
     the_roster.badge_number = params.fetch("query_badge_number")
     the_roster.first_name = params.fetch("query_first_name")
     the_roster.last_name = params.fetch("query_last_name")
@@ -53,9 +50,9 @@ class RostersController < ApplicationController
 
     if the_roster.valid?
       the_roster.save
-      redirect_to("/rosters/#{the_roster.id}", { :notice => "Roster updated successfully."} )
+      redirect_to("/roster/#{the_roster.id}", { :notice => "Roster updated successfully."} )
     else
-      redirect_to("/rosters/#{the_roster.id}", { :alert => "Roster failed to update successfully." })
+      redirect_to("/roster/#{the_roster.id}", { :alert => "Roster failed to update successfully." })
     end
   end
 
