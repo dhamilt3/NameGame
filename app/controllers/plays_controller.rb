@@ -12,9 +12,8 @@ class PlaysController < ApplicationController
     render({ :template => "plays/show.html.erb" })
   end
 
-
   def new_play
-    if session.fetch("play_id") == nil
+    if session.fetch("draw_number") == 0
       the_play = Play.new
       the_play.user_id = @current_user.id
       the_play.save
@@ -33,6 +32,23 @@ class PlaysController < ApplicationController
     render({:template => "plays/start.html.erb"})
   end
 
+  def view_play_result
+    @play_id = session.fetch("play_id") +1
+    @draw_number = 0
+
+    session.store(:play_id, @play_id)
+    session.store(:draw_number, @draw_number)
+
+    render({:template => "plays/view_play_result.html.erb"})
+  end
+
+
+
+
+
+
+
+
 
   def create
     the_play = Play.new
@@ -47,23 +63,29 @@ class PlaysController < ApplicationController
     # end
   end
 
-  def update
-    the_id = params.fetch("path_id")
-    the_play = Play.where({ :id => the_id }).at(0)
 
-    the_play.user_id = params.fetch("query_user_id")
-    the_play.correct_sum = params.fetch("query_correct_sum")
-    the_play.incorrect_sum = params.fetch("query_incorrect_sum")
-    the_play.result = params.fetch("query_result")
-    the_play.draws_count = params.fetch("query_draws_count")
 
-    if the_play.valid?
-      the_play.save
-      redirect_to("/plays/#{the_play.id}", { :notice => "Play updated successfully."} )
-    else
-      redirect_to("/plays/#{the_play.id}", { :alert => "Play failed to update successfully." })
-    end
-  end
+
+
+
+
+  # def update
+  #   the_id = params.fetch("path_id")
+  #   the_play = Play.where({ :id => the_id }).at(0)
+
+  #   the_play.user_id = params.fetch("query_user_id")
+  #   the_play.correct_sum = params.fetch("query_correct_sum")
+  #   the_play.incorrect_sum = params.fetch("query_incorrect_sum")
+  #   the_play.result = params.fetch("query_result")
+  #   the_play.draws_count = params.fetch("query_draws_count")
+
+  #   if the_play.valid?
+  #     the_play.save
+  #     redirect_to("/plays/#{the_play.id}", { :notice => "Play updated successfully."} )
+  #   else
+  #     redirect_to("/plays/#{the_play.id}", { :alert => "Play failed to update successfully." })
+  #   end
+  # end
 
   # def destroy
   #   the_id = params.fetch("path_id")

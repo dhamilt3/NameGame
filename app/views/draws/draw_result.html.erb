@@ -1,4 +1,4 @@
-<h1>Draw Result</h1>
+<h1>Draw Result for <%=session.fetch("draw_number")%></h1>
 
 <div>
   Your Answer: <%=@answer%>
@@ -18,13 +18,18 @@
 
 <hr>
 
-<div>
-  <form action="/new_draw">
-    <button>Next Draw</button>
-  </form>
-</div>
+<% if session.fetch("draw_number") >= 5 %>
+  <div>
+    <form action="/view_play_result">
+      <button>View Result</button>
+    </form>
+  </div>
+<%else%>
+  <div>
+    <form action="/new_draw">
+      <button>Next Draw</button>
+    </form>
+  </div>
+<%end%>
 
-<div>
-  <%=max.inspect%>
-</div>
   

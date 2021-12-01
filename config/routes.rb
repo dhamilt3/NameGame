@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get("/new_draw", {:controller => "draws", :action => "new_draw"})       
   get("/draw_result", {:controller => "draws", :action => "draw_result"})
 
-
   # READ
   get("/draws", { :controller => "draws", :action => "index" })
   get("/draws/:path_id", { :controller => "draws", :action => "show" })
@@ -22,11 +21,12 @@ Rails.application.routes.draw do
   # post("/insert_draw", { :controller => "draws", :action => "create" })  
  
 
-  # Routes for the Play resource:------------------------------------------
+  # PLAY RESOURCE------------------------------------------
 
   # CREATE
     get("/play", {:controller => "plays", :action => "home"}) #this has been reviewed
     get("/new_play", {:controller => "plays", :action => "new_play"})
+    get("/view_play_result", {:controller => "plays", :action => "view_play_result"})
  
     # READ
     get("/plays", { :controller => "plays", :action => "index" })
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     # DELETE
     get("/delete_play/:path_id", { :controller => "plays", :action => "destroy" })
 
-  # Routes for the User account:-------------------------------------------------------
+  # USER RESROUCE:-------------------------------------------------------
 
     # SIGN UP FORM
     get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })   #customized 
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     # DELETE RECORD
     get("/cancel_user_account", { :controller => "user_authentication", :action => "destroy" })
 
- #Sign In -----------------------------------------------------------------------------------
+ #SIGN IN RESROUCE -----------------------------------------------------------------------------------
 
   # SIGN IN FORM 
     get("/user_sign_in", { :controller => "user_authentication", :action => "sign_in_form" })
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     # SIGN OUT        
     get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
               
-  # Routes for the Roster resource:-------------------------------------------------
+  # ROSTER RESOURCE-------------------------------------------------
 
     # CREATE
     post("/insert_roster", { :controller => "rosters", :action => "create" })     

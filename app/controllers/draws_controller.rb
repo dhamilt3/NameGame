@@ -17,8 +17,19 @@ class DrawsController < ApplicationController
     the_draw.roster_id = roster_sample.id                   #set field
     the_draw.name_match = roster_sample.preferred_name      #set field
     the_draw.play_id = session.fetch("play_id")       #set field
+    the_draw.draw_count = the_draw.draw_count.to_i + 1   #populate the draw_count
     the_draw.save                                     #save the record
     @draw = Draw.all.where({:id => the_draw.id}).at(0)    #create an instance variable for the draw_id
+
+   @draw_num = session.fetch("draw_number")
+    if @draw_num == nil
+       session.store(:draw_number, 1)
+       @draw_num = 1
+    else
+      @draw_num = @draw_num.to_i + 1
+      session.store(:draw_number, @draw_num)
+    end
+
 
     render({:template => "draws/new_draw.html.erb"})
   end
@@ -29,7 +40,10 @@ class DrawsController < ApplicationController
 
     play_id = session.fetch("play_id")
     the_draws = Draw.all.where({:play_id => play_id})
-    
+
+
+    draw_id = params.fetch("draw_id")
+
     the_draws.each do |each_draw| 
       each_draw.draw_count = each_draw.draw_count.to_i + 1
       each_draw.draw_total
@@ -38,7 +52,7 @@ class DrawsController < ApplicationController
 
     play_id = session.fetch("play_id")                  #fetch cookie for the current play
     the_draws = Draw.all.where({:play_id => play_id})   #find matching play records
-    max_record = the_draws.max                           #return the maximum record
+    max_record = the_draws.min                           #return the newest record
     max = max_record.draw_count                         #create a variable for the draw_count on the max_record 
 
     the_draws.each do |each_draw|                       #loop each of the records
