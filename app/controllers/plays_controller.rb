@@ -14,11 +14,18 @@ class PlaysController < ApplicationController
 
 
   def new_play
-    the_play = Play.new
-    the_play.user_id = @current_user.id
-    the_play.save
-    @current_play = the_play.id
-    session.store(:play_id, @current_play)
+    if session.fetch("play_id") == nil
+      the_play = Play.new
+      the_play.user_id = @current_user.id
+      the_play.save
+      @current_play = the_play.id                       #create an ainstance variable of the current play id
+      session.store(:play_id, @current_play)            #create a cookie to store the current play
+   
+    else 
+      the_play_id =  session.fetch("play_id")
+      the_play = Play.all.where({:id => the_play_id}).at(0)
+      @current_play = the_play.id 
+    end
     render({:template => "plays/new_play.html.erb"})
   end
 

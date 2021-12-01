@@ -1,4 +1,30 @@
 <h1>Draw Result</h1>
 
-Your Answer:<%=@answer%>
-Correct Answer: <%=@draw_solution%>
+<div>
+  Your Answer: <%=@answer%>
+</div>
+
+<div>
+  Correct Answer: <%=@draw_solution%>
+</div>
+
+<div>
+  <%if @answer == @draw_solution%>
+    correct
+  <%else%>
+    incorrect
+  <%end%>
+</div>
+
+<hr>
+
+<div>
+  <form action="/new_draw">
+    <button>Next Draw</button>
+  </form>
+</div>
+
+<div>
+  <%=max.inspect%>
+</div>
+  

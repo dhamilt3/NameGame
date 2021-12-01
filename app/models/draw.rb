@@ -3,6 +3,8 @@
 # Table name: draws
 #
 #  id           :integer          not null, primary key
+#  draw_count   :integer
+#  draw_total   :integer
 #  name_attempt :string
 #  name_match   :string
 #  created_at   :datetime         not null

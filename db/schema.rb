@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_024703) do
+ActiveRecord::Schema.define(version: 2021_11_30_233936) do
 
   create_table "draws", force: :cascade do |t|
     t.integer "roster_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2021_11_29_024703) do
     t.integer "play_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "draw_count"
+    t.integer "draw_total"
   end
 
   create_table "plays", force: :cascade do |t|
