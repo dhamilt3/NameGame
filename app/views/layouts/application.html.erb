@@ -29,13 +29,18 @@
     </ul>
 
     <div>Current User 
-    <%=@current_user.inspect%>
-    <%if @current_user == nil %>
-    none
-    <%else%>
-      <%@current_user%>
-    <%end%>
-      
+      <%=@current_user.inspect%>
+      <%if @current_user == nil %>
+      none
+      <%else%>
+        <%@current_user%>
+      <%end%>
+    </div>
+
+<hr>
+
+    <div>
+      Play Id:  <%=session.fetch("play_id")%>
     </div>
     <%= yield %>
   </body>

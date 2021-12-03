@@ -19,11 +19,14 @@ class PlaysController < ApplicationController
       the_play.save
       @current_play = the_play.id                       #create an ainstance variable of the current play id
       session.store(:play_id, @current_play)            #create a cookie to store the current play
-   
     else 
+      the_play = Play.new
+      the_play.user_id = @current_user.id
+      the_play.save
+      @current_play = the_play.id                       #create an ainstance variable of the current play id
+      session.store(:play_id, @current_play)  
       the_play_id =  session.fetch("play_id")
       the_play = Play.all.where({:id => the_play_id}).at(0)
-      @current_play = the_play.id 
     end
     render({:template => "plays/new_play.html.erb"})
   end
@@ -33,11 +36,12 @@ class PlaysController < ApplicationController
   end
 
   def view_play_result
-    @play_id = session.fetch("play_id") +1
-    @draw_number = 0
+    @play_last_id = session.fetch("play_id")
+    @draw_set = Draw.all.where({:play_id => @play_last_id})
 
-    session.store(:play_id, @play_id)
-    session.store(:draw_number, @draw_number)
+
+    session.store(:play_id, nil)
+    session.store(:draw_number, nil)
 
     render({:template => "plays/view_play_result.html.erb"})
   end
