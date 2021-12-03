@@ -1,11 +1,13 @@
 <h1>Start new play</h1>
 
-<form>
-  <input name="query_play" type="hidden" value="<%@current_play%>">
-</form>
-
 <div><%=@current_play%></div>
 
-<ul>
-  <li><a href="/new_draw">Proceed to draws</a></li> <%#this is being done SOLELY to visualize data flow, this will be done automaticatlly eventually%>
-</ul>
+<form action="/new_draw">
+  <input name="query_play" type="hidden" value="<%@current_play%>">
+  <input name="draw_present" value=0 id="query_draw_present">
+  <button>Proceed to Draws</button>
+</form>
+
+<%#this is being done SOLELY to visualize data flow, this will be done automaticatlly eventually%>
+
+

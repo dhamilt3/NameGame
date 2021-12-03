@@ -17,25 +17,28 @@
 </div>
 
 <form>
-  <input name="draw_result" value="<%=@result%>">
-  <input name="draw_response" value ="<%=@response%>">
+ 
 </form>
 
 
 <hr>
 
+<div>
 <% if session.fetch("draw_number") >= 5 %>
-  <div>
     <form action="/view_play_result">
+      <input name="draw_present" value=1>
+      <input name="draw_result" value="<%=@result%>">
+      <input name="draw_response" value ="<%=@response%>">
       <button>View Result</button>
     </form>
-  </div>
 <%else%>
-  <div>
     <form action="/new_draw">
+       <input name="draw_present" value=1>
+       <input name="draw_result" value="<%=@result%>">
+       <input name="draw_response" value ="<%=@response%>">
       <button>Next Draw</button>
     </form>
-  </div>
 <%end%>
+</div>
 
   

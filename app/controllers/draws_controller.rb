@@ -1,6 +1,20 @@
 class DrawsController < ApplicationController
   
   def new_draw
+
+     #if a draw was taken, commit the results to the draw table
+     #this essentially checks if this is a new start or a subsequent draw
+
+     if params.fetch("draw_present") == 1
+      
+       #do stuff
+       
+     else
+     end
+ 
+
+    #create a new roster sample
+
     roster_sample = Roster.all.sample   #sample the database
     @photo = roster_sample.image        #extract a photo from the sample
     @roster_id = roster_sample.id         #extract the roster_id from the sample
@@ -14,6 +28,7 @@ class DrawsController < ApplicationController
     roster_sample.save
 
 
+  #create the next draw
 
     the_draw = Draw.new                               #create a new draw
     the_draw.roster_id = roster_sample.id                   #set field
@@ -32,10 +47,11 @@ class DrawsController < ApplicationController
       session.store(:draw_number, @draw_num)
     end
 
-
     render({:template => "draws/new_draw.html.erb"})
   end
   
+
+
   def draw_result
     @draw_solution = params.fetch("draw_solution")
     @response = params.fetch("answer")
