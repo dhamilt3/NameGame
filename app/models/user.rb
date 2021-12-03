@@ -3,7 +3,9 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
+#  admin           :boolean
 #  badge_number    :integer
+#  draw_correct    :integer
 #  email           :string
 #  first_name      :string
 #  last_name       :string

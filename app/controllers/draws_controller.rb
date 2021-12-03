@@ -13,6 +13,8 @@ class DrawsController < ApplicationController
     roster_sample.draws_count = @number      #update the draws count
     roster_sample.save
 
+
+
     the_draw = Draw.new                               #create a new draw
     the_draw.roster_id = roster_sample.id                   #set field
     the_draw.name_match = roster_sample.preferred_name      #set field
@@ -36,7 +38,7 @@ class DrawsController < ApplicationController
   
   def draw_result
     @draw_solution = params.fetch("draw_solution")
-    @answer = params.fetch("answer")
+    @response = params.fetch("answer")
 
     play_id = session.fetch("play_id")
     the_draws = Draw.all.where({:play_id => play_id})

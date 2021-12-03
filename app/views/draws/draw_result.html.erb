@@ -1,7 +1,7 @@
 <h1>Draw Result for <%=session.fetch("draw_number")%></h1>
 
 <div>
-  Your Answer: <%=@answer%>
+  Your Answer: <%=@response%>
 </div>
 
 <div>
@@ -9,12 +9,18 @@
 </div>
 
 <div>
-  <%if @answer == @draw_solution%>
-    correct
+  <%if @response == @draw_solution%>
+    <%= @result = "correct" %>
   <%else%>
-    incorrect
+    <%= @result = "incorrect" %>
   <%end%>
 </div>
+
+<form>
+  <input name="draw_result" value="<%=@result%>">
+  <input name="draw_response" value ="<%=@response%>">
+</form>
+
 
 <hr>
 

@@ -13,7 +13,7 @@ class PlaysController < ApplicationController
   end
 
   def new_play
-    if session.fetch("draw_number") == 0
+    if session.fetch("play_id") == nil
       the_play = Play.new
       the_play.user_id = @current_user.id
       the_play.save
@@ -28,7 +28,7 @@ class PlaysController < ApplicationController
     render({:template => "plays/new_play.html.erb"})
   end
 
-  def home
+  def start
     render({:template => "plays/start.html.erb"})
   end
 
