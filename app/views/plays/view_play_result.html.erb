@@ -1,11 +1,29 @@
 <h1> Play Results <%=@play_id%></h1>
 
 <div>
-  <%=@draw_set.count%>
+  Draws: <%=@draw_set.count%>
 </div>
 
 <div>
   The Play: <%=@user_play%>
 </div>
 
- 
+ <div>
+
+  <table border="1">
+    <%@draw_set.each do |draw|%>
+
+    <tr>
+      <th>Draw</th>
+      <th>Name</th>
+    </tr>
+
+    <tr>
+      <td><%=draw.draw_count%>
+      <td><%=draw.name_match%>
+    </tr>
+    <%end%>
+  </table>
+
+
+ </div>

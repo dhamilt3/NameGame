@@ -9,7 +9,7 @@
 </div>
 
 <div>
-  <%if @response == @draw_solution%>
+  <%if @response.downcase == @draw_solution.downcase%>
     <%= @result = "correct" %>
   <%else%>
     <%= @result = "incorrect" %>
