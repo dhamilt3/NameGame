@@ -45,13 +45,16 @@ class PlaysController < ApplicationController
     the_play.save                           #save the play record
     @user_play = the_play.user_play         #create an instance variable of the user play
 
+    user_id = @current_user.id
+    the_user = User.all.where({:id => user_id}).first
+    the_user.plays_count = completed_plays
+    the_user.save
+
     @play_last_id = session.fetch("play_id")
     @draw_set = Draw.all.where({:play_id => @play_last_id})
 
-
-
-    # session.store(:play_id, nil)
-    # session.store(:draw_number, nil)
+    session.store(:play_id, nil)
+    session.store(:draw_number, nil)
 
     render({:template => "plays/view_play_result.html.erb"})
   end

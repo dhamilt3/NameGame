@@ -1,5 +1,5 @@
-<h1>Current_Play <%=session.fetch("play_id")%></h1>
-<h1>Draw Number <%=@draw_num%>/5 </h1>
+<h1>Current_Play <%=@current_user.plays_count + 1%></h1>
+<h1>Draw Number <%=@draw_count%> /5 </h1>
 <div>
   <img src="<%=@photo%>">
 </div>
@@ -9,7 +9,7 @@
     <label for="query_answer">Name</label>
     <input id="query_answer" placeholder="who is this?" name="answer">
     <input  id="query_draw_solution" value="<%=@roster_record.preferred_name%>" name="draw_solution">
-    <input  id="query_draw_id" value="<%=@draw.id%>" name="draw_id">
+    <input  id="query_draw_id" value="<%=@draw_count%>" name="draw_id">
     <button>Submit</button>
   </form>
 </div>

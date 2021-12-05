@@ -1,84 +1,51 @@
 class DrawsController < ApplicationController
   
   def new_draw
-
-     #if a draw was taken, commit the results to the draw table
-     #this essentially checks if this is a new start or a subsequent draw
-
-     if params.fetch("draw_present") == 1
-      
-       #do stuff
-       
-     else
-     end
  
-
     #create a new roster sample
 
     roster_sample = Roster.all.sample   #sample the database
     @photo = roster_sample.image        #extract a photo from the sample
     @roster_id = roster_sample.id         #extract the roster_id from the sample
     @roster_record = Roster.all.where({:id => @roster_id}).at(0)
-      if roster_sample.draws_count == nil
-        @number = 1
-      else  
-        @number= roster_sample.draws_count.to_i + 1   #create a variable of "draws_count" + 1
-      end
-    roster_sample.draws_count = @number      #update the draws count
-    roster_sample.save
-
 
   #create the next draw
-
     the_draw = Draw.new                               #create a new draw
     the_draw.roster_id = roster_sample.id                   #set field
     the_draw.name_match = roster_sample.preferred_name      #set field
-    the_draw.play_id = session.fetch("play_id")       #set field
-    the_draw.draw_count = the_draw.draw_count.to_i + 1   #populate the draw_count
-    the_draw.save                                     #save the record
-    @draw = Draw.all.where({:id => the_draw.id}).at(0)    #create an instance variable for the draw_id
+    the_draw.play_id = session.fetch("play_id")
+    the_draw.save
+    
+    play_id = session.fetch("play_id")                  #extract the current_play from the session hash
+    the_draws = Draw.all.where({:play_id => play_id})   #return an array of draws for the most recent play
+    draw_count = the_draws.count                        #count the draws in the current play
+    the_draw.draw_count = draw_count                    #set the current record draw_count equal to the draws count of the current play
+    the_draw.play_id = session.fetch("play_id")         #set draw play_id
+    the_draw.save                                       #save the changes
 
-   @draw_num = session.fetch("draw_number")
-    if @draw_num == nil
-       session.store(:draw_number, 1)
-       @draw_num = 1
-    else
-      @draw_num = @draw_num.to_i + 1
-      session.store(:draw_number, @draw_num)
-    end
+
+    session.store(:draw_number, draw_count)
+    @draw_count = draw_count
 
     render({:template => "draws/new_draw.html.erb"})
   end
-  
 
 
   def draw_result
-    @draw_solution = params.fetch("draw_solution")
-    @response = params.fetch("answer")
+    @draw_solution = params.fetch("draw_solution")      #extract the draw solution from the params hash
+    @response = params.fetch("answer")                  #extract the user_response from the params hash
+    play_id = session.fetch("play_id")                  #extract the current_play from the session hash
+    draw_id = params.fetch("draw_id")                   #return the draw_id from the params hash
 
-    play_id = session.fetch("play_id")
-    the_draws = Draw.all.where({:play_id => play_id})
-
-
-    draw_id = params.fetch("draw_id")
-
-    the_draws.each do |each_draw| 
-      each_draw.draw_count = each_draw.draw_count.to_i + 1
-      each_draw.draw_total
-      each_draw.save
-    end
-
-    play_id = session.fetch("play_id")                  #fetch cookie for the current play
-    the_draws = Draw.all.where({:play_id => play_id})   #find matching play records
-    max_record = the_draws.min                           #return the newest record
-    max = max_record.draw_count                         #create a variable for the draw_count on the max_record 
-
+    play_id = session.fetch("play_id")                  #extract the current_play from the session hash
+    the_draws = Draw.all.where({:play_id => play_id})   #return an array of draws for the most recent play
+    draw_count = the_draws.count
+  
     the_draws.each do |each_draw|                       #loop each of the records
-      each_draw.draw_total = max                        #over write each record to the largest value
+      each_draw.draw_total = draw_count                 #over_write the draw_total with the current_draw count
       each_draw.save                                    #save
-    end
+    end 
      
-
     render({:template => "draws/draw_result.html.erb"})
   end
 

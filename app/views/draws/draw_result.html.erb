@@ -24,20 +24,34 @@
 <hr>
 
 <div>
-<% if session.fetch("draw_number") >= 5 %>
-    <form action="/view_play_result">
+<% if session.fetch("draw_number") == nil%>
+    <form action="/new_draw">
       <input name="draw_present" value=1>
       <input name="draw_result" value="<%=@result%>">
       <input name="draw_response" value ="<%=@response%>">
-      <button>View Result</button>
+      <button>Continue</button>
     </form>
-<%else%>
+<%elsif session.fetch("draw_number") <5%>
     <form action="/new_draw">
        <input name="draw_present" value=1>
        <input name="draw_result" value="<%=@result%>">
        <input name="draw_response" value ="<%=@response%>">
-      <button>Next Draw</button>
+      <button>Continue</button>
     </form>
+  
+<%else%>
+    <form action="/view_play_result">
+       <input name="draw_present" value=1>
+       <input name="draw_result" value="<%=@result%>">
+       <input name="draw_response" value ="<%=@response%>">
+      <button>Continue</button>
+    </form>
+
+
+
+
+
+
 <%end%>
 </div>
 
