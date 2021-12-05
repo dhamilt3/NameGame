@@ -7,6 +7,7 @@
 #  draws_count   :integer
 #  incorrect_sum :string
 #  result        :string
+#  user_play     :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  user_id       :integer

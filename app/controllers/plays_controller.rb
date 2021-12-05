@@ -13,10 +13,10 @@ class PlaysController < ApplicationController
   end
 
   def new_play
-    if session.fetch("play_id") == nil
-      the_play = Play.new
-      the_play.user_id = @current_user.id
-      the_play.save
+    if session.fetch("play_id") == nil                  #if there is not a current play in session
+      the_play = Play.new                               #create a new play in the play table
+      the_play.user_id = @current_user.id               #set the field "user_id" using the current user cookie
+      the_play.save                                     #save the new play record
       @current_play = the_play.id                       #create an ainstance variable of the current play id
       session.store(:play_id, @current_play)            #create a cookie to store the current play
     else 
@@ -35,13 +35,23 @@ class PlaysController < ApplicationController
     render({:template => "plays/start.html.erb"})
   end
 
+
   def view_play_result
+    user_plays = Play.all.where({:user_id => @current_user.id })    #find the active record relation for all plays the user has made
+    completed_plays = user_plays.count                              #count the number of user_plays   
+    play_id = session.fetch("play_id")     #retireve the current play id from the cookie
+    the_play = Play.all.where({:id => play_id}).at(0) #retrieve the play record from the current play
+    the_play.user_play = completed_plays    #set the user_play field equal to the completed plays
+    the_play.save                           #save the play record
+    @user_play = the_play.user_play         #create an instance variable of the user play
+
     @play_last_id = session.fetch("play_id")
     @draw_set = Draw.all.where({:play_id => @play_last_id})
 
 
-    session.store(:play_id, nil)
-    session.store(:draw_number, nil)
+
+    # session.store(:play_id, nil)
+    # session.store(:draw_number, nil)
 
     render({:template => "plays/view_play_result.html.erb"})
   end
