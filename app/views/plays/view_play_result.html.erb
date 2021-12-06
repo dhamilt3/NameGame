@@ -14,16 +14,27 @@
     <%@draw_set.each do |draw|%>
 
     <tr>
-      <th>Draw</th>
-      <th>Name</th>
+      <th>Photo</th>
+      <th>Correct_Answer</th>
+      <th>Your Answer</th>
     </tr>
 
     <tr>
-      <td><%=draw.draw_count%>
+      <%roster_member = Roster.all.where({:id => draw.roster_id}).at(0)%>
+      <%img_url = roster_member.image%>
+
+      <td><img src="<%=img_url%>"></td>      
       <td><%=draw.name_match%>
+      <td><%=draw.name_attempt%>
+
+     
     </tr>
     <%end%>
   </table>
 
 
  </div>
+
+ <div>Correct: <%=@correct_count.to_i%></div>
+ <div>Incorrect: <%=@incorrect_count.to_i%></div>
+ <div>Accuracy: <%=(@percent)%>%</div>

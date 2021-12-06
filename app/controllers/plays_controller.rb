@@ -17,6 +17,7 @@ class PlaysController < ApplicationController
     session.store(:play_id, nil)
     session.store(:draw_number, nil)
     session.store(:draw_id, nil)
+    session.store(:play_count, nil)
 
     if session.fetch("play_id") == nil                  #if there is not a current play in session
       the_play = Play.new                               #create a new play in the play table
@@ -33,6 +34,13 @@ class PlaysController < ApplicationController
       the_play_id =  session.fetch("play_id")
       the_play = Play.all.where({:id => the_play_id}).at(0)
     end
+  
+    user_id = @current_user.id
+    user_plays = Play.all.where({:user_id => user_id})
+    play_count = user_plays.count
+    play_new = play_count
+    session.store(:play_count, play_new)
+
 
 
     render({:template => "plays/new_play.html.erb"})
@@ -58,26 +66,32 @@ class PlaysController < ApplicationController
     #count the correct answers
     play_id = session.fetch("play_id")
     user_draws_correct = Draw.all.where({:play_id => play_id}).where({:draw_result => 1})
-    correct_count = user_draws_correct.count
+    @correct_count = user_draws_correct.count.to_f
 
     #calculate the incorrect answers
     user_draws_correct = Draw.all.where({:play_id => play_id}).where({:draw_result => 0})
-    incorrect_count = user_draws_correct.count
+    @incorrect_count = user_draws_correct.count.to_f
+
+    #calculate the percent
+    @percent = 0
+    @percent = @correct_count/(@correct_count + @incorrect_count )
+    @percent = @percent*100
+    @percent = @percent.to_i
+  
   
   #update the play    
     play_id = session.fetch("play_id")                             #retireve the current play id from the cookie
     the_play = Play.all.where({:id => play_id}).at(0) #retrieve the play record from the current play
     the_play.user_play = plays_count    #set the user_play field equal to the completed plays
-    the_play.correct_sum = correct_count
-    the_play.incorrect_sum = incorrect_count
-    the_play.percent = (correct_count.to_f)/(plays_count.to_f)
+    the_play.correct_sum = @correct_count
+    the_play.incorrect_sum = @incorrect_count
+    the_play.percent = @percent
     the_play.save                           #save the play record
     @user_play = the_play.user_play         #create an instance variable of the user play
     
 
     @draw_set = Draw.all.where({:play_id => play_id})   #returns an array of the plays
-
-
+    
     user_id = @current_user.id
     the_user = User.all.where({:id => user_id}).first
     the_user.plays_count = plays_count

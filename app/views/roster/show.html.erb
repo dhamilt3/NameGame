@@ -99,7 +99,7 @@
 
 <hr>
 
-
+<%if @current_user.present?%>
 <%if @current_user.admin == true %>
 
 <div>
@@ -170,5 +170,6 @@
 
 <hr>
 
-<%else%>
+
+<%end%>
 <%end%>
