@@ -6,6 +6,7 @@
 #  correct_sum   :string
 #  draws_count   :integer
 #  incorrect_sum :string
+#  percent       :float
 #  result        :string
 #  user_play     :integer
 #  created_at    :datetime         not null

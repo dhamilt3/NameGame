@@ -10,9 +10,9 @@
 
 <div>
   <%if @response.downcase == @draw_solution.downcase%>
-    <%= @result = "correct" %>
+    <%= @result = 1 %> Correct!
   <%else%>
-    <%= @result = "incorrect" %>
+    <%= @result = 0 %> Incorrect
   <%end%>
 </div>
 
@@ -29,6 +29,7 @@
       <input name="draw_present" value=1>
       <input name="draw_result" value="<%=@result%>">
       <input name="draw_response" value ="<%=@response%>">
+      <input name="draw_id" value=<%=session.fetch("draw_id")%>>
       <button>Continue</button>
     </form>
 <%elsif session.fetch("draw_number") <5%>
@@ -36,14 +37,15 @@
        <input name="draw_present" value=1>
        <input name="draw_result" value="<%=@result%>">
        <input name="draw_response" value ="<%=@response%>">
+      <input name="draw_id" value=<%=session.fetch("draw_id")%>>
       <button>Continue</button>
     </form>
-  
 <%else%>
     <form action="/view_play_result">
        <input name="draw_present" value=1>
        <input name="draw_result" value="<%=@result%>">
        <input name="draw_response" value ="<%=@response%>">
+       <input name="draw_id" value=<%=session.fetch("draw_id")%>>
       <button>Continue</button>
     </form>
 

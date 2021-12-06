@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_201321) do
+ActiveRecord::Schema.define(version: 2021_12_06_054642) do
 
   create_table "draws", force: :cascade do |t|
     t.integer "roster_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_201321) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "draw_count"
     t.integer "draw_total"
+    t.integer "draw_result"
   end
 
   create_table "plays", force: :cascade do |t|
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_201321) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_play"
+    t.float "percent"
   end
 
   create_table "rosters", force: :cascade do |t|

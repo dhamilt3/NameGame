@@ -13,8 +13,10 @@ class PlaysController < ApplicationController
   end
 
   def new_play
+    #reset the game cookies
     session.store(:play_id, nil)
     session.store(:draw_number, nil)
+    session.store(:draw_id, nil)
 
     if session.fetch("play_id") == nil                  #if there is not a current play in session
       the_play = Play.new                               #create a new play in the play table
@@ -42,11 +44,33 @@ class PlaysController < ApplicationController
 
 
   def view_play_result
+    #resolve the last draw
+     draw_id = session.fetch("draw_id")
+     last_draw = Draw.all.where({:id => draw_id}).first
+     @draw_result = params.fetch("draw_result").to_i     #extract the draw_result from the params hash
+     last_draw.draw_result = @draw_result
+     last_draw.save
+    
+    #count the plays
     user_plays = Play.all.where({:user_id => @current_user.id })    #find the active record relation for all plays the user has made
-    completed_plays = user_plays.count                              #count the number of user_plays   
-    play_id = session.fetch("play_id")        #retireve the current play id from the cookie
+    plays_count = user_plays.count                              #count the number of user_plays   
+
+    #count the correct answers
+    play_id = session.fetch("play_id")
+    user_draws_correct = Draw.all.where({:play_id => play_id}).where({:draw_result => 1})
+    correct_count = user_draws_correct.count
+
+    #calculate the incorrect answers
+    user_draws_correct = Draw.all.where({:play_id => play_id}).where({:draw_result => 0})
+    incorrect_count = user_draws_correct.count
+  
+  #update the play    
+    play_id = session.fetch("play_id")                             #retireve the current play id from the cookie
     the_play = Play.all.where({:id => play_id}).at(0) #retrieve the play record from the current play
-    the_play.user_play = completed_plays    #set the user_play field equal to the completed plays
+    the_play.user_play = plays_count    #set the user_play field equal to the completed plays
+    the_play.correct_sum = correct_count
+    the_play.incorrect_sum = incorrect_count
+    the_play.percent = (correct_count.to_f)/(plays_count.to_f)
     the_play.save                           #save the play record
     @user_play = the_play.user_play         #create an instance variable of the user play
     
@@ -56,7 +80,7 @@ class PlaysController < ApplicationController
 
     user_id = @current_user.id
     the_user = User.all.where({:id => user_id}).first
-    the_user.plays_count = completed_plays
+    the_user.plays_count = plays_count
     the_user.save
 
     @play_last_id = session.fetch("play_id")
