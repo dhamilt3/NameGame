@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   # PLAY RESOURCE------------------------------------------
 
   # CREATE
-    get("/play", {:controller => "plays", :action => "start"}) #this has been reviewed
     get("/new_play", {:controller => "plays", :action => "new_play"})
     get("/view_play_result", {:controller => "plays", :action => "view_play_result"})
  

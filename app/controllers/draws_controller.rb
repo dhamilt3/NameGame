@@ -3,27 +3,22 @@ class DrawsController < ApplicationController
   def new_draw
  
     #create a new roster sample
-
     roster_sample = Roster.all.sample   #sample the database
     @photo = roster_sample.image        #extract a photo from the sample
     @roster_id = roster_sample.id         #extract the roster_id from the sample
     @roster_record = Roster.all.where({:id => @roster_id}).at(0)
 
 
-    #for the first session
-    if session.fetch("draw_number") == nil
-    #do nothing
-    else
-    #update the previous draw number
+  if session.fetch("draw_result") == nil #if there is no preceeding answer
+  #do nothing, there is nothing to save
+  else      
+  #update the previous draw number
     draw_id = session.fetch("draw_id")
     last_draw = Draw.all.where({:id => draw_id}).first
-    @draw_result = params.fetch("draw_result").to_i     #extract the draw_result from the params hash
+    @draw_result = session.fetch("draw_result").to_i     #extract the draw_result from the params hash
     last_draw.draw_result = @draw_result
-    last_draw.save
-
-   end
-
-    
+    last_draw.save 
+  end    
 
   #create the next draw
     the_draw = Draw.new                               #create a new draw

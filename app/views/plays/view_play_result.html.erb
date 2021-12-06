@@ -8,8 +8,11 @@
   The Play: <%=@user_play%>
 </div>
 
- <div>
+ <div>Correct: <%=@correct_count.to_i%></div>
+ <div>Incorrect: <%=@incorrect_count.to_i%></div>
+ <div>Accuracy: <%=(@percent)%>%</div>
 
+ <div>
   <table border="1">
     <%@draw_set.each do |draw|%>
 
@@ -17,6 +20,7 @@
       <th>Photo</th>
       <th>Correct_Answer</th>
       <th>Your Answer</th>
+      <th>Points</th>
     </tr>
 
     <tr>
@@ -26,7 +30,7 @@
       <td><img src="<%=img_url%>"></td>      
       <td><%=draw.name_match%>
       <td><%=draw.name_attempt%>
-
+      <td><%=draw.draw_result%>
      
     </tr>
     <%end%>
@@ -35,6 +39,4 @@
 
  </div>
 
- <div>Correct: <%=@correct_count.to_i%></div>
- <div>Incorrect: <%=@incorrect_count.to_i%></div>
- <div>Accuracy: <%=(@percent)%>%</div>
+

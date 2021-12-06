@@ -13,11 +13,12 @@ class PlaysController < ApplicationController
   end
 
   def new_play
-    #reset the game cookies
+    #reset/build the game cookies
     session.store(:play_id, nil)
+    session.store(:play_count, nil)
     session.store(:draw_number, nil)
     session.store(:draw_id, nil)
-    session.store(:play_count, nil)
+    session.store(:draw_result, nil)
 
     if session.fetch("play_id") == nil                  #if there is not a current play in session
       the_play = Play.new                               #create a new play in the play table
@@ -46,16 +47,12 @@ class PlaysController < ApplicationController
     render({:template => "plays/new_play.html.erb"})
   end
 
-  def start
-    render({:template => "plays/start.html.erb"})
-  end
-
 
   def view_play_result
     #resolve the last draw
      draw_id = session.fetch("draw_id")
      last_draw = Draw.all.where({:id => draw_id}).first
-     @draw_result = params.fetch("draw_result").to_i     #extract the draw_result from the params hash
+     @draw_result = session.fetch("draw_result").to_i     #extract the draw_result from the params hash
      last_draw.draw_result = @draw_result
      last_draw.save
     
