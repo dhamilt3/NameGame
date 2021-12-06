@@ -44,7 +44,6 @@ class PlaysController < ApplicationController
     session.store(:play_count, play_new)
 
 
-
     render({:template => "plays/new_play.html.erb"})
   end
 
@@ -104,25 +103,40 @@ class PlaysController < ApplicationController
   end
 
 
+  def user_plays 
+    #check to see if the user is logged in
+    if @current_user == nil
 
+    redirect_to("/")      
+    else # proceed with script    
+  
+        #this s a feature to prevent a user from seeing another user's plays
+      @query_user = params.fetch("user").to_s
+      @user = @current_user.id.to_s
 
-
-
-
-
-
-  def create
-    the_play = Play.new
-    the_play.user_id = @current_user.id
-
-    # if the_play.valid?
-      the_play.save
-      @current_play = the_play.id
-      redirect_to("/new_draw_start", { :notice => "Play created successfully." })
-    # else
-    #   redirect_to("/play", { :notice => "Play failed to create successfully." })
-    # end
+      if @query_user == @user 
+        render({:template => "plays/user_plays.html.erb"})
+      else
+        redirect_to("/user_plays/"+@user)  
+      end
+    
+    end
   end
+
+
+
+  # def create
+  #   the_play = Play.new
+  #   the_play.user_id = @current_user.id
+
+  #   # if the_play.valid?
+  #     the_play.save
+  #     @current_play = the_play.id
+  #     redirect_to("/new_draw_start", { :notice => "Play created successfully." })
+  #   # else
+  #   #   redirect_to("/play", { :notice => "Play failed to create successfully." })
+  #   # end
+  # end
 
 
 
@@ -154,4 +168,5 @@ class PlaysController < ApplicationController
   #   the_play.destroy
   #   redirect_to("/plays", { :notice => "Play deleted successfully."} )
   # end
+
 end

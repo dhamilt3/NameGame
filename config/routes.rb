@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # CREATE
     get("/new_play", {:controller => "plays", :action => "new_play"})
     get("/view_play_result", {:controller => "plays", :action => "view_play_result"})
+    get("/user_plays/:user", {:controller => "plays", :action => "user_plays"})
  
     # READ
     get("/plays", { :controller => "plays", :action => "index" })
