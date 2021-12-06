@@ -1,17 +1,33 @@
 class DrawsController < ApplicationController
   
   def new_draw
- 
-    #create a new roster sample
+
+    # draw_number = session.fetch("draw_number")
+    # draw_check = session.fetch("draw_check")
+    # if draw_number == nil
+    #   session.store(:draw_number, 0)
+    # end
+    # if draw_check == nil
+    #   session.store(:draw_check, 0)
+    # end
+    # draw_number.to_i
+    # draw_check.to_i
+    # draw_diff = 0
+    # draw_diff.to_i
+    # draw_diff = draw_number - draw_check
+
+    #proceed 
+
+    #create a new roster sample---------------------------
     roster_sample = Roster.all.sample   #sample the database
     @photo = roster_sample.image        #extract a photo from the sample
     @roster_id = roster_sample.id         #extract the roster_id from the sample
     @roster_record = Roster.all.where({:id => @roster_id}).at(0)
 
-
-  if session.fetch("draw_result") == nil #if there is no preceeding answer
-  #do nothing, there is nothing to save
-  else      
+  #if this is a brand_new draw
+  if session.fetch("draw_result") == nil
+  #there is no record to update, do nothing
+  else           
   #update the previous draw number
     draw_id = session.fetch("draw_id")
     last_draw = Draw.all.where({:id => draw_id}).first
@@ -39,7 +55,9 @@ class DrawsController < ApplicationController
     @draw_count = draw_count
 
     render({:template => "draws/new_draw.html.erb"})
-  end
+
+  
+end
 
 
   def draw_result
@@ -51,11 +69,14 @@ class DrawsController < ApplicationController
     current_draw = Draw.all.where({:id => @draw_id}).at(0)
     current_draw.name_attempt = @response
     current_draw.save
+
+    draw_check = session.fetch("draw_number")
+    session.store(:draw_check, draw_check)
       
 
     play_id = session.fetch("play_id")                  #extract the current_play from the session hash
     the_draws = Draw.all.where({:play_id => play_id})   #return an array of draws for the most recent play
-    draw_count = the_draws.count
+    draw_count = the_draws.count                        
   
     the_draws.each do |each_draw|                       #loop each of the records
       each_draw.draw_total = draw_count                 #over_write the draw_total with the current_draw count
@@ -110,6 +131,7 @@ class DrawsController < ApplicationController
     else
       redirect_to("/draws/#{the_draw.id}", { :alert => "Draw failed to update successfully." })
     end
+
   end
 
   def destroy
@@ -119,4 +141,6 @@ class DrawsController < ApplicationController
 
     redirect_to("/draws", { :notice => "Draw deleted successfully."} )
   end
+
 end
+

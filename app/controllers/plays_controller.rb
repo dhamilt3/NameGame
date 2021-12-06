@@ -19,6 +19,7 @@ class PlaysController < ApplicationController
     session.store(:draw_number, nil)
     session.store(:draw_id, nil)
     session.store(:draw_result, nil)
+    session.store(:draw_check, nil)
 
     if session.fetch("play_id") == nil                  #if there is not a current play in session
       the_play = Play.new                               #create a new play in the play table

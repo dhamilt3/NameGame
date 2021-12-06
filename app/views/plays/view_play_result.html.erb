@@ -1,6 +1,14 @@
 <h1> Play Results <%=@play_id%></h1>
 
 <div>
+<ul>
+  <li><a href="/new_play">Play Again</a></li>
+  <li><a href="/">Home<a></li>
+</ul>
+</div>
+
+
+<div>
   Draws: <%=@draw_set.count%>
 </div>
 
@@ -28,9 +36,9 @@
       <%img_url = roster_member.image%>
 
       <td><img src="<%=img_url%>"></td>      
-      <td><%=draw.name_match%>
-      <td><%=draw.name_attempt%>
-      <td><%=draw.draw_result%>
+      <td><%=draw.name_match%></td>
+      <td><%=draw.name_attempt%></td>
+      <td><%=draw.draw_result%></td>
      
     </tr>
     <%end%>

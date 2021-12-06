@@ -41,7 +41,10 @@
     <%if @current_user.present?%>
       <div>User_id: <%=@current_user.id%></div>
       <div>Play:  <%=session.fetch("play_id")%></div>
-      <div>Draw: <%=session.fetch("draw_number")%>
+      <div>Draw: <%=session.fetch("draw_number")%></div>
+      <div>Draw_id: <%=session.fetch("draw_id")%></div>
+      <div>Draw_result <%=session.fetch("draw_result")%></div>
+      <div>Draw_check<%=session.fetch("draw_check")%></div>
     <%else%>
     <%end%>
     

@@ -5,9 +5,17 @@
   <%end%>
   </h1>
 
-  <h1>Start new play</h1>
+<%if @current_user == nil%>
+  <li><a href="/user_sign_up">Sign Up</a></li>
+  <li><a href="/user_sign_in">Sign In</a></li>
+  <li><a href="/roster">View Roster</a></li>
+
+<%else %>
+  <h1>Menu</h1>
 <ul>
   <li><a href="/new_play">Begin new play</a></li>
   <li>View previous plays</li>
-  <li><a href="/">Return to home</a></li>
+  <li><a href="/roster">View Roster</a></li>
 </ul>
+
+<%end%>
