@@ -6,15 +6,19 @@
 
     <div>
       <div>
-        <a href="/roster">Go back</a>
+        <a href="/roster">View Roster</a>
       </div>
 
+<%if @current_user.present?%>
+  <%if @current_user.admin == true%>
       <div>
         <a href="/delete_roster/<%= @the_roster.id %>">
-          Delete roster
+          Delete Member
         </a>
       </div>
     </div>
+  <%end%>
+<%end%>
 
     <dl>
       <%# <dt>

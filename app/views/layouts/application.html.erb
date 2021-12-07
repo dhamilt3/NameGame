@@ -13,9 +13,25 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
-  </head>
+      <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
+      <meta charset="utf-8">
 
+      <!-- Connect Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+      <!-- Connect Bootstrap JavaScript and its dependencies -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+      <!-- Connect Font Awesome -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+      <!-- Make it responsive to small screens -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  </head>
   <body>
+
     <ul>
     <%if @current_user == nil%>
       <li><a href="/user_sign_up">Sign Up</a></li>
@@ -47,7 +63,20 @@
       <div>Draw_result <%=session.fetch("draw_result")%></div>
       <div>Draw_check<%=session.fetch("draw_check")%></div>
       <div>Sample<%=session.fetch("sample")%>
+      <div>
     <%else%>
+    <%end%>
+
+    <% if notice.present?%>
+    <div style="border: thin green solid; color: green">
+      <%=notice%>
+    </div>
+    <%end%>
+
+ <% if alert.present?%>
+    <div style="border: thin red solid; color: red">
+      <%=alert%>
+    </div>
     <%end%>
     
 

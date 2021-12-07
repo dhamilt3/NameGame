@@ -1,16 +1,5 @@
 class PlaysController < ApplicationController
-  def index
-    matching_plays = Play.all
-    @list_of_plays = matching_plays.order({ :created_at => :desc })
-    render({ :template => "plays/index.html.erb" })
-  end
 
-  def show
-    the_id = params.fetch("path_id")
-    matching_plays = Play.where({ :id => the_id })
-    @the_play = matching_plays.at(0)
-    render({ :template => "plays/show.html.erb" })
-  end
 
   def new_play
     #reset/build the game cookies
@@ -98,8 +87,6 @@ class PlaysController < ApplicationController
     @play_last_id = session.fetch("play_id")
     @draw_set = Draw.all.where({:play_id => @play_last_id})
 
-   
-
     render({:template => "plays/view_play_result.html.erb"})
   end
 
@@ -116,9 +103,7 @@ class PlaysController < ApplicationController
 
       if @query_user == @user #if you are the authorized user, proceed
 
-
-      @play_set = Play.all.where({:user_id => @user}).order(:user_play => :desc).first(10)
-
+         @play_set = Play.all.where({:user_id => @user}).order(:user_play => :desc).first(10)
 
         render({:template => "plays/user_plays.html.erb"})
 
@@ -129,6 +114,19 @@ class PlaysController < ApplicationController
     end
   end
 
+
+  # def index
+  #   matching_plays = Play.all
+  #   @list_of_plays = matching_plays.order({ :created_at => :desc })
+  #   render({ :template => "plays/index.html.erb" })
+  # end
+
+  # def show
+  #   the_id = params.fetch("path_id")
+  #   matching_plays = Play.where({ :id => the_id })
+  #   @the_play = matching_plays.at(0)
+  #   render({ :template => "plays/show.html.erb" })
+  # end
 
 
   # def create
@@ -143,11 +141,6 @@ class PlaysController < ApplicationController
   #   #   redirect_to("/play", { :notice => "Play failed to create successfully." })
   #   # end
   # end
-
-
-
-
-
 
 
   # def update

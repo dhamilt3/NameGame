@@ -22,14 +22,16 @@
 
  <div>
   <table border="1">
-    <%@draw_set.each do |draw|%>
-
+  
     <tr>
       <th>Photo</th>
-      <th>Correct_Answer</th>
+      <th>Correct Answer</th>
       <th>Your Answer</th>
       <th>Points</th>
+      <th> </th>
     </tr>
+
+    <%@draw_set.each do |draw|%>
 
     <tr>
       <%roster_member = Roster.all.where({:id => draw.roster_id}).at(0)%>
@@ -39,6 +41,7 @@
       <td><%=draw.name_match%></td>
       <td><%=draw.name_attempt%></td>
       <td><%=draw.draw_result%></td>
+      <td><a href="/roster/<%=draw.roster_id%>">Show details</a></td>
      
     </tr>
     <%end%>

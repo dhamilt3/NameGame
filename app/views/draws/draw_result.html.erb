@@ -9,7 +9,7 @@
 </div>
 
 <div>
-  <%if @response.downcase == @draw_solution.downcase%>
+  <%if @response.downcase.strip == @draw_solution.downcase.strip%>
     <%= @result = 1 %> Correct
   <%else%>
     <%= @result = 0 %> Sorry, your answer was incorrect

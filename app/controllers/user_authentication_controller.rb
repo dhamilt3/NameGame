@@ -28,7 +28,6 @@ class UserAuthenticationController < ApplicationController
 
   def destroy_cookies
     reset_session
-
     redirect_to("/", { :notice => "Signed out successfully." })
   end
 

@@ -1,26 +1,28 @@
 Rails.application.routes.draw do
 
-  #general information
+  #HOME-----------------------------
   get("/", {:controller => "application", :action => "home" })  #this route has been customized
 
-  # Routes for the Draw resource:----------------------------
+  # DRAW RESOURCE----------------------------
 
   # CREATE
-  get("/new_draw", {:controller => "draws", :action => "new_draw"})       
+  get("/new_draw", {:controller => "draws", :action => "new_draw"})
+  
+  # READ     
   get("/draw_result", {:controller => "draws", :action => "draw_result"})
   get("/play_history_detail/:play", {:controller => "draws", :action => "play_history"})
 
-  # READ
-  get("/draws", { :controller => "draws", :action => "index" })
-  get("/draws/:path_id", { :controller => "draws", :action => "show" })
-  # UPDATE
-  post("/modify_draw/:path_id", { :controller => "draws", :action => "update" })
-  # DELETE
-  get("/delete_draw/:path_id", { :controller => "draws", :action => "destroy" })
+
+  # # UPDATE
+  # post("/modify_draw/:path_id", { :controller => "draws", :action => "update" })
+  # # DELETE
+  # get("/delete_draw/:path_id", { :controller => "draws", :action => "destroy" })
 
   #not currently in use:
   # post("/insert_draw", { :controller => "draws", :action => "create" })  
- 
+  # get("/draws", { :controller => "draws", :action => "index" })
+  # get("/draws/:path_id", { :controller => "draws", :action => "show" })
+
 
   # PLAY RESOURCE------------------------------------------
 
@@ -29,13 +31,14 @@ Rails.application.routes.draw do
     get("/view_play_result", {:controller => "plays", :action => "view_play_result"})
     get("/user_plays/:user", {:controller => "plays", :action => "user_plays"})
  
+
     # READ
-    get("/plays", { :controller => "plays", :action => "index" })
-    get("/plays/:path_id", { :controller => "plays", :action => "show" })
-    # UPDATE
-    post("/modify_play/:path_id", { :controller => "plays", :action => "update" })
-    # DELETE
-    get("/delete_play/:path_id", { :controller => "plays", :action => "destroy" })
+    # get("/plays", { :controller => "plays", :action => "index" })
+    # get("/plays/:path_id", { :controller => "plays", :action => "show" })
+    # # UPDATE
+    # post("/modify_play/:path_id", { :controller => "plays", :action => "update" })
+    # # DELETE
+    # get("/delete_play/:path_id", { :controller => "plays", :action => "destroy" })
 
   # USER RESROUCE:-------------------------------------------------------
 
