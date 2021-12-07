@@ -2,6 +2,7 @@ class DrawsController < ApplicationController
   
   def new_draw
 
+    #this was code to prevent reh refresh problem
     # draw_number = session.fetch("draw_number")
     # draw_check = session.fetch("draw_check")
     # if draw_number == nil
@@ -15,11 +16,13 @@ class DrawsController < ApplicationController
     # draw_diff = 0
     # draw_diff.to_i
     # draw_diff = draw_number - draw_check
-
     #proceed 
 
     #create a new roster sample---------------------------
-    roster_sample = Roster.all.sample   #sample the database
+    roster = Roster.all.where.not(:id => session.fetch(:sample))
+    roster_sample = roster.sample  #sample the database
+    session[:sample].push(roster_sample.id)
+
     @photo = roster_sample.image        #extract a photo from the sample
     @roster_id = roster_sample.id         #extract the roster_id from the sample
     @roster_record = Roster.all.where({:id => @roster_id}).at(0)
