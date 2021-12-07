@@ -106,7 +106,6 @@ class PlaysController < ApplicationController
   def user_plays 
     #check to see if the user is logged in
     if @current_user == nil
-
     redirect_to("/")      
     else # proceed with script    
   
@@ -114,9 +113,15 @@ class PlaysController < ApplicationController
       @query_user = params.fetch("user").to_s
       @user = @current_user.id.to_s
 
-      if @query_user == @user 
+      if @query_user == @user #if you are the authorized user, proceed
+
+
+      @play_set = Play.all.where({:user_id => @user}).order(:user_play => :desc).first(10)
+
+
         render({:template => "plays/user_plays.html.erb"})
-      else
+
+      else    #else, redirect to the correct page
         redirect_to("/user_plays/"+@user)  
       end
     

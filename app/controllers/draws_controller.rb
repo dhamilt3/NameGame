@@ -87,6 +87,35 @@ end
     render({:template => "draws/draw_result.html.erb"})
   end
 
+
+  def play_history  
+   #check to see if the user is logged in
+    if @current_user == nil
+    redirect_to("/") 
+
+    else # proceed with script    
+  
+      #this s a feature to prevent a user from seeing another user's plays
+      @play = params.fetch("play")
+      the_play = Play.all.where({:id => @play}).first
+      @play_user = the_play.user_id.to_s
+      @user = @current_user.id.to_s
+
+      if @user == @play_user #if you are the authorized user, proceed
+
+      @draw_set = Draw.all.where({:play_id => @play}).order(:id => :desc)
+
+       
+      render({:template => "draws/play_history.html.erb"}) 
+
+      else    #else, redirect to valid user's pages
+      redirect_to("/user_plays/"+user)  
+      end
+    
+    end
+
+  end
+
   
   
   def index

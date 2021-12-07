@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # CREATE
   get("/new_draw", {:controller => "draws", :action => "new_draw"})       
   get("/draw_result", {:controller => "draws", :action => "draw_result"})
+  get("/play_history_detail/:play", {:controller => "draws", :action => "play_history"})
 
   # READ
   get("/draws", { :controller => "draws", :action => "index" })

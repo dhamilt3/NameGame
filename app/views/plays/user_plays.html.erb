@@ -1,5 +1,36 @@
 
-<h1>User Plays</h1>
+<h1>Last 10 plays</h1>
 <h2>User Query<%=@query_user%></h2>
 User Current<%=@user%>
+
+<table border="1">
+  <tr>
+    <th>Play</th>
+    <th>Date</th>
+    <th>Correct</th>
+    <th>Incorrect</th>
+    <th>Percent</th>
+    <th></th> 
+ 
+
+
+
+  </tr>
+
+<%@play_set.each do |play|%>
+
+  <tr>
+    <td><%=play.user_play%></td>
+    <td><%=play.updated_at.month%>-<%=play.updated_at.day%>-<%=play.updated_at.year%></td>
+    <td><%=play.correct_sum%></td>
+    <td><%=play.incorrect_sum%></td>
+    <td><%=play.percent%></td>
+    <td><a href="/play_history_detail/<%=play.id%>">Show Details</a></td>
+  </tr>
+
+  
+
+
+  <%end%>
+</table>
 

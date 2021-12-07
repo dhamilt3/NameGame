@@ -23,9 +23,10 @@
     <%else%>
       <li><a href="/user_sign_out">Sign Out</a></li>
       <li><a href="/new_play">Play</a></li>
-      <li>View Progress</li>
+      <li><a href="/user_plays/<%=@current_user.id%>">Previous Plays</a></li>
     <%end%>
       <li><a href="/roster">View Roster</a></li>
+  
     </ul>
 
     <div>Current User 

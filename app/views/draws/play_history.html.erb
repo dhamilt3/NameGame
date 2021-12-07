@@ -1,0 +1,30 @@
+Play history
+Play user <%=@play_user%>
+Current User <%=@user%>
+
+<div>
+  <table border="1">
+    <%@draw_set.each do |draw|%>
+
+    <tr>
+      <th>Photo</th>
+      <th>Correct_Answer</th>
+      <th>Your Answer</th>
+      <th>Points</th>
+    </tr>
+
+    <tr>
+      <%roster_member = Roster.all.where({:id => draw.roster_id}).at(0)%>
+      <%img_url = roster_member.image%>
+
+      <td><img src="<%=img_url%>"></td>      
+      <td><%=draw.name_match%></td>
+      <td><%=draw.name_attempt%></td>
+      <td><%=draw.draw_result%></td>
+     
+    </tr>
+    <%end%>
+  </table>
+
+
+ </div>
