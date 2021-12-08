@@ -1,21 +1,41 @@
 <h1>Play <%=session.fetch("play_count")%></h1>
 <h1>Question <%=@draw_count%> /5 </h1>
-<div>
-  <img src="<%=@photo%>">
+
+
+
+
+<div class = "container">
+  <div class = "row">
+    <div class ="col-md-4"><div>
+    <div class ="col-md-4">
+        
+
+    <div class="card text-center" style="width: 18rem;">
+      <img src="<%=@photo%>" class="card-img-top" alt="draw photo">
+      <div class="card-body">
+        <p class="card-text">
+
+         <form action="/draw_result">
+          <label for="query_answer">Name</label>
+          <input id="query_answer" placeholder="who is this?" name="answer">
+          <input  id="query_draw_solution" type="hidden" value="<%=@roster_record.preferred_name%>" name="draw_solution">
+          <input  id="query_draw_count" type="hidden" value="<%=@draw_count%>" name="draw_count">
+          <input id="query_draw_id" type="hidden" value="<%=session.fetch("draw_id")%>" name="draw_id">
+          <button>Submit</button>
+        </form>
+
+        </p>
+
+    </div>
+    </div>
+    </div>
+    
+    <div class ="col-md-4"><div>
+
+  </div>
 </div>
 
-<div>
-  <form action="/draw_result">
-    <label for="query_answer">Name</label>
-    <input id="query_answer" placeholder="who is this?" name="answer">
-    <input  id="query_draw_solution" value="<%=@roster_record.preferred_name%>" name="draw_solution">
-    <input  id="query_draw_count" value="<%=@draw_count%>" name="draw_count">
-    <input id="query_draw_id" value="<%=session.fetch("draw_id")%>" name="draw_id">
-    <button>Submit</button>
-  </form>
-</div>
 
-<div>
-  Current User: <%=@current_user.id%>
-</div>
+
+
 
