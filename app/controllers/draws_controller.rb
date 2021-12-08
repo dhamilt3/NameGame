@@ -4,14 +4,16 @@ class DrawsController < ApplicationController
 
     if session.fetch(:draw_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
     
-    session.store(:draw_ongoing, nil)     #delete the session cookie
-
-    #destroy the abandoned play
+      #destroy the abandoned play
     the_id = session.fetch("play_id")
     the_play = Play.where({ :id => the_id }).at(0)
     the_play.destroy
 
-    redirect_to("/new_play", { :alert => "Play abaonded."})              
+    redirect_to("/new_play", { :alert => "Play abaonded."})   
+    
+    session.store(:play_ongoing, nil) 
+    session.store(:draw_ongoing, nil)     #delete the session cookie
+    
     else
 
 
@@ -65,7 +67,9 @@ class DrawsController < ApplicationController
       "How about this one?",
       "Do you know who this is?",
       "Who is this?",
-      "Who is this?"      ]
+      "Who is this?",
+      "Take your time..."
+    ]
       @prompt = prompt_array.sample
 
 

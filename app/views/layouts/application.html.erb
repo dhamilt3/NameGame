@@ -108,6 +108,10 @@
 
   
     <%if @current_user.present?%>
+    <%#do nothing%>
+    <%elsif @current_user == nil%>
+    <%#do nohting%>
+    <%else%>          <%#NOTE__ I used this block of code for trouble shooting--i Want to leave it in, but am hiding it for now, rather than commenting out as an html.erb%>
       <div>User_id: <%=@current_user.id%></div>
       <div>Play:  <%=session.fetch("play_id")%></div>
       <div>Draw: <%=session.fetch("draw_number")%></div>
@@ -117,7 +121,11 @@
       <div>Sample<%=session.fetch("sample")%>
       <div>Draw ongoing<%=session.fetch("draw_ongoing")%>
       <div>
-    <%else%>
+      Play Id:  <%=session.fetch("play_id")%>
+      </div>
+
+
+
     <%end%>
 
     <% if notice.present?%>
@@ -131,13 +139,9 @@
       <%=alert%>
     </div>
     <%end%>
-    
 
 <hr>
 
-    <div>
-      Play Id:  <%=session.fetch("play_id")%>
-    </div>
     <%= yield %>
   </body>
 </html>

@@ -1,38 +1,49 @@
-<div class = "container">
-  <div class = "row">
-    <div class ="col-md-4"><div>
-    <div class ="col-md-4">
         
+<%#tart of the card%>
 
-    <div class="card text-center" style="width: 18rem;">
-      <div class="card-header">
-        Play <%=session.fetch("play_count")%> - Question <%=@draw_count%>/5
-      </div>
-      <img src="<%=@photo%>" class="card-img-top" alt="draw photo">
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Play <%=session.fetch("play_count")%> - Question <%=@draw_count%>/5</h5>
+
+  <%#nesting the card withing the card header%>
+
+  <div class="card mb-3" style="max-width: 540px;">
+   <div class="row no-gutters">
+   
+    <div class="col-md-5">
+      <img src="<%=@photo%>" alt="photo of draw">
+    </div>
+ 
+    <div class="col-md-5">
       <div class="card-body">
-        <p class="card-text">
+        <h5 class="card-title">
+        </h5>
+        <p class="card-text-center" style="width: 18rem;">
+                  
+          <form action="/draw_result">
+            <label for="query_answer">Name</label>
+            <input id="query_answer" placeholder="<%=@prompt%>" name="answer">
+            <input  id="query_draw_solution" type="hidden" value="<%=@roster_record.preferred_name%>" name="draw_solution">
+            <input  id="query_draw_count" type="hidden" value="<%=@draw_count%>" name="draw_count">
+            <input id="query_draw_id" type="hidden" value="<%=session.fetch("draw_id")%>" name="draw_id">
 
-         <form action="/draw_result">
-          <label for="query_answer">Name</label>
-          <input id="query_answer" placeholder="<%=@prompt%>" name="answer">
-          <input  id="query_draw_solution" type="hidden" value="<%=@roster_record.preferred_name%>" name="draw_solution">
-          <input  id="query_draw_count" type="hidden" value="<%=@draw_count%>" name="draw_count">
-          <input id="query_draw_id" type="hidden" value="<%=session.fetch("draw_id")%>" name="draw_id">
-          <button class="btn btn-primary">Submit</button>
-        </form>
+          <div class="card-body">
+            <button class="btn btn-primary">Submit</button>
+          </div>
 
-        </p>
+          </form>
+          </p>
 
+          </div>
+      <%#end of the list within the card%>
+
+          </div>
+          <div>
+      </div>
     </div>
-    </div>
-    </div>
-    
-    <div class ="col-md-4"><div>
-
   </div>
 </div>
 
-
-
+<%#end of the nested card%>
 
 

@@ -1,21 +1,32 @@
-<h1>Welcome to NameGame 
+<h1>Welcome
+
   <%if @current_user == nil%>
   <%else%>
   <%=@current_user.first_name%> 
   <%end%>
   </h1>
 
-<%if @current_user == nil%>
-  <li><a href="/user_sign_up">Sign Up</a></li>
-  <li><a href="/user_sign_in">Sign In</a></li>
-  <li><a href="/roster">View Roster</a></li>
+<%#start card layout%>
 
-<%else %>
-  <h1>Menu</h1>
-<ul>
-  <li><a href="/new_play">Begin new play</a></li>
-  <li><a href="/user_plays/<%=@current_user.id%>">View previous plays<a></li>
-  <li><a href="/roster">View Roster</a></li>
-</ul>
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Want to play a game?</h5>
+        <p class="card-text">Time to show off how many people you know.</p>
+        <a href="/new_play" class="btn btn-primary">Play</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Feel like brushing up?</h5>
+        <p class="card-text">Take a look at the roster to learn some new names.</p>
+        <a href="/roster" class="btn btn-primary">Roster</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%end%>
+

@@ -1,7 +1,18 @@
 class PlaysController < ApplicationController
 
-
   def new_play
+    if session.fetch(:play_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
+      session.store(:play_ongoing, nil)     #delete the session cookie
+      redirect_to("/", { :alert => "Play abaonded."}) 
+
+      #destroy the abandoned play
+      the_id = session.fetch("play_id")
+      the_play = Play.where({ :id => the_id }).at(0)
+      the_play.destroy
+      
+
+    else #run the entire play script uninterrupted
+    
     #reset/build the game cookies
     session.store(:play_id, nil)
     session.store(:play_count, nil)
@@ -10,7 +21,9 @@ class PlaysController < ApplicationController
     session.store(:draw_result, nil)
     session.store(:draw_check, nil)
     session.store(:draw_ongoing, nil)
+    session.store(:play_ongoing, 1)
     session[:sample] = Array.new
+
 
     if session.fetch("play_id") == nil                  #if there is not a current play in session
       the_play = Play.new                               #create a new play in the play table
@@ -87,6 +100,8 @@ class PlaysController < ApplicationController
     @play_last_id = session.fetch("play_id")
     @draw_set = Draw.all.where({:play_id => @play_last_id})
 
+    session.store(:play_ongoing, nil) #destroy the play ongoing cookie
+
     render({:template => "plays/view_play_result.html.erb"})
   end
 
@@ -112,6 +127,7 @@ class PlaysController < ApplicationController
       end
     
     end
+  end #this is the end for the "if" statment of the cookie check
   end
 
 

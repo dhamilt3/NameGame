@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Roster #<%= @the_roster.id %> details
+      Roster details:  <%= @the_roster.first_name %> <%= @the_roster.last_name %>
     </h1>
 
     <div>
@@ -70,6 +70,8 @@
 <%if @current_user.present?%>
 <%if @current_user.admin == true %>
 
+<hr>
+
 <div>
   <div>
     <h2>
@@ -82,7 +84,7 @@
           Badge number
         </label>
 
-        <input type="text" id="badge_number_box" name="query_badge_number" value="<%= @the_roster.badge_number %>">
+        <input type="text"  class="form-control" id="badge_number_box" name="query_badge_number" value="<%= @the_roster.badge_number %>">
       </div>
 
       <div>
@@ -90,7 +92,7 @@
           First name
         </label>
 
-        <input type="text" id="first_name_box" name="query_first_name" value="<%= @the_roster.first_name %>">
+        <input type="text"  class="form-control" id="first_name_box" name="query_first_name" value="<%= @the_roster.first_name %>">
       </div>
 
       <div>
@@ -98,40 +100,40 @@
           Last name
         </label>
 
-        <input type="text" id="last_name_box" name="query_last_name" value="<%= @the_roster.last_name %>">
+        <input type="text" class="form-control" id="last_name_box" name="query_last_name" value="<%= @the_roster.last_name %>">
       </div>
 
       <div>
         <label for="preferred_name_box">Preferred name</label>
-        <input type="text" id="preferred_name_box" name="query_preferred_name" value="<%= @the_roster.preferred_name %>">
+        <input type="text"  class="form-control" id="preferred_name_box" name="query_preferred_name" value="<%= @the_roster.preferred_name %>">
       </div>
 
       <div>
         <label for="shift_box">Shift</label>
-        <input type="text" id="shift_box" name="query_shift" value="<%= @the_roster.shift %>">
+        <input type="text"  class="form-control" id="shift_box" name="query_shift" value="<%= @the_roster.shift %>">
       </div>
 
       <div>
         <label for="department_box">Department</label>
-        <input type="text" id="department_box" name="query_department" value="<%= @the_roster.department %>">
+        <input type="text"  class="form-control" id="department_box" name="query_department" value="<%= @the_roster.department %>">
       </div>
 
       <div>
         <label for="role_box">Role</label>
-        <input type="text" id="role_box" name="query_role" value="<%= @the_roster.role %>">
+        <input type="text"  class="form-control" id="role_box" name="query_role" value="<%= @the_roster.role %>">
       </div>
 
       <div>
         <label for="image_box">Image</label>
-        <input type="text" id="image_box" name="query_image" value="<%= @the_roster.image %>">
+        <input type="text"  class="form-control" id="image_box" name="query_image" value="<%= @the_roster.image %>">
       </div>
 
       <div>
         <label for="draws_count_box">Draws count</label>
-        <input type="text" id="draws_count_box" name="query_draws_count" value="<%= @the_roster.draws_count %>">
+        <input type="text" class="form-control" id="draws_count_box" name="query_draws_count" value="<%= @the_roster.draws_count %>">
       </div>
 
-      <button>Update roster</button>
+      <button class="btn btn-primary">Update roster</button>
     </form>
   </div>
 </div>
