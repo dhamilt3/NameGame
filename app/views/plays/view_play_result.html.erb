@@ -8,17 +8,20 @@
 </div>
 
 
-<div>
-  Draws: <%=@draw_set.count%>
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    Summary
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Draws: <%=@draw_set.count%></li>
+    <li class="list-group-item">Your Play: <%=@user_play%></li>
+    <li class="list-group-item">Correct: <%=@correct_count.to_i%></li>
+    <li class="list-group-item">Incorrect: <%=@incorrect_count.to_i%></li>
+    <li class="list-group-item">Accuracy: <%=(@percent)%>%</li>
+  </ul>
 </div>
 
-<div>
-  The Play: <%=@user_play%>
-</div>
-
- <div>Correct: <%=@correct_count.to_i%></div>
- <div>Incorrect: <%=@incorrect_count.to_i%></div>
- <div>Accuracy: <%=(@percent)%>%</div>
+<hr>
 
  <div>
   <table border="1">

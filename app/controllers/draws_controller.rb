@@ -30,7 +30,8 @@ class DrawsController < ApplicationController
   #if this is a brand_new draw
   if session.fetch("draw_result") == nil
   #there is no record to update, do nothing
-  else           
+  else 
+
   #update the previous draw number
     draw_id = session.fetch("draw_id")
     last_draw = Draw.all.where({:id => draw_id}).first
@@ -75,8 +76,7 @@ end
 
     draw_check = session.fetch("draw_number")
     session.store(:draw_check, draw_check)
-      
-
+    
     play_id = session.fetch("play_id")                  #extract the current_play from the session hash
     the_draws = Draw.all.where({:play_id => play_id})   #return an array of draws for the most recent play
     draw_count = the_draws.count                        
@@ -85,7 +85,6 @@ end
       each_draw.draw_total = draw_count                 #over_write the draw_total with the current_draw count
       each_draw.save                                    #save
     end 
-
 
     render({:template => "draws/draw_result.html.erb"})
   end

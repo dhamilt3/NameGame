@@ -1,9 +1,3 @@
-<h1>Play <%=session.fetch("play_count")%></h1>
-<h1>Question <%=@draw_count%> /5 </h1>
-
-
-
-
 <div class = "container">
   <div class = "row">
     <div class ="col-md-4"><div>
@@ -11,6 +5,9 @@
         
 
     <div class="card text-center" style="width: 18rem;">
+      <div class="card-header">
+        Play <%=session.fetch("play_count")%> - Question <%=@draw_count%>/5
+      </div>
       <img src="<%=@photo%>" class="card-img-top" alt="draw photo">
       <div class="card-body">
         <p class="card-text">
@@ -21,7 +18,7 @@
           <input  id="query_draw_solution" type="hidden" value="<%=@roster_record.preferred_name%>" name="draw_solution">
           <input  id="query_draw_count" type="hidden" value="<%=@draw_count%>" name="draw_count">
           <input id="query_draw_id" type="hidden" value="<%=session.fetch("draw_id")%>" name="draw_id">
-          <button>Submit</button>
+          <button class="btn btn-primary">Submit</button>
         </form>
 
         </p>

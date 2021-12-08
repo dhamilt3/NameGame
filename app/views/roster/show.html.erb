@@ -5,9 +5,7 @@
     </h1>
 
     <div>
-      <div>
-        <a href="/roster">View Roster</a>
-      </div>
+      
 
 <%if @current_user.present?%>
   <%if @current_user.admin == true%>
@@ -20,6 +18,8 @@
   <%end%>
 <%end%>
 
+
+
     <dl>
       <%# <dt>
         Badge number
@@ -28,47 +28,13 @@
         <%= @the_roster.badge_number %>
       <%# </dd> %>
 
-      <dt>
-        First name
+        <%# <dt>
+        Draws count
       </dt>
       <dd>
-        <%= @the_roster.first_name %>
-      </dd>
+        <%= @the_roster.draws_count%>
+      <%# </dd> %>
 
-      <dt>
-        Last name
-      </dt>
-      <dd>
-        <%= @the_roster.last_name %>
-      </dd>
-
-      <dt>
-        Preferred name
-      </dt>
-      <dd>
-        <%= @the_roster.preferred_name %>
-      </dd>
-
-      <dt>
-        Shift
-      </dt>
-      <dd>
-        <%= @the_roster.shift %>
-      </dd>
-
-      <dt>
-        Department
-      </dt>
-      <dd>
-        <%= @the_roster.department %>
-      </dd>
-
-      <dt>
-        Role
-      </dt>
-      <dd>
-        <%= @the_roster.role %>
-      </dd>
 
       <dt>
         Image
@@ -76,32 +42,30 @@
       <dd>
         <img src="<%= @the_roster.image %>">
       </dd>
+      </dl>
 
-      <%# <dt>
-        Draws count
-      </dt>
-      <dd>
-        <%= @the_roster.draws_count%>
-      <%# </dd> %>
+        <ul class="list-group">
+          <li class="list-group-item">First name: <%= @the_roster.first_name %></li>
+          <li class="list-group-item">Last name: <%= @the_roster.last_name %></li>
+          <li class="list-group-item">Preferred name: <%= @the_roster.preferred_name %></li>
+          <li class="list-group-item">Shift: <%= @the_roster.shift %> </li>
+          <li class="list-group-item">Department: <%= @the_roster.department %></li>
+          <li class="list-group-item">Role: <%= @the_roster.role %></li>
+          <li class="list-group-item">Created: <%= time_ago_in_words(@the_roster.created_at) %> ago </li>
+          <li class="list-group-item">Last Updated:  <%= time_ago_in_words(@the_roster.updated_at) %> ago</li>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_roster.created_at) %> ago
-      </dd>
+        </ul>
+    <div>
+      <a href="/roster">Return to Roster </a>
+    </div>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_roster.updated_at) %> ago
-      </dd>
-    </dl>
+
+    
+   
   </div>
 </div>
 
-<hr>
+
 
 <%if @current_user.present?%>
 <%if @current_user.admin == true %>

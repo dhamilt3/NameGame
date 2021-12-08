@@ -1,52 +1,92 @@
-<h1>Draw Result for <%=session.fetch("draw_number")%></h1>
 
-<div>
-  Your Answer: <%=@response%>
-</div>
+<%draw_id = params.fetch("draw_id")%>
+<%draw_record = Draw.all.where({:id => draw_id}).first%>
+<%roster_id = draw_record.roster_id%>
+<%roster_record = Roster.all.where({:id => roster_id}).first%>
+<%image = roster_record.image%>
 
-<div>
-  Correct Answer: <%=@draw_solution%>
-</div>
 
-<div>
-  <%if @response.downcase.strip == @draw_solution.downcase.strip%>
-    <%= @result = 1 %> Correct
-  <%else%>
-    <%= @result = 0 %> Sorry, your answer was incorrect
-  <%end%>
-</div>
 
-<form>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Draw <%=session.fetch("draw_number")%> Result</h5>
+
+  <%#nesting the card withing the card header%>
+
+  <div class="card mb-3" style="max-width: 540px;">
+   <div class="row no-gutters">
+   
+    <div class="col-md-5">
+      <img src="<%=image%>" alt="photo of draw result">
+    </div>
  
-</form>
+    <div class="col-md-5">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <p class="card-text-center" style="width: 18rem;">
+        
+      <%#list within the card%>
 
+          <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Your Answer: <%=@response%></li>
+              <li class="list-group-item">Correct Answer: <%=@draw_solution%></li>
+              <li class="list-group-item">
+                  <%if @response.downcase.strip == @draw_solution.downcase.strip%>
+                    <%@result = 1 %> Correct
+                  <%else%>
+                    <%@result = 0 %> Sorry, your answer was incorrect
+                  <%end%>
+                   <%session.store(:draw_result, @result)%>
+              </li>
+              
+            </ul>
+          </div>
+      <%#end of the list within the card%>
 
-<hr>
+          </div>
+          <div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div>
-<% if session.fetch("draw_number") == nil%>
+<%#end of the nested card%>
+    
+    <%#button form with if statement%>
+    <% if session.fetch("draw_number") == nil%>
     <form action="/new_draw">
       <input name="draw_present" value=1 type="hidden">
       <input name="draw_response" type="hidden" value ="<%=@response%>">
       <input name="draw_id" type="hidden" value=<%=session.fetch("draw_id")%>>
-      <button>Continue</button>
+      <input name="draw_result" type="hidden" value=<%=@result%>>
+      <button class="btn btn-primary">Continue</button>
     </form>
 <%elsif session.fetch("draw_number") <5%>
     <form action="/new_draw">
        <input name="draw_present" value=1 type="hidden">
        <input name="draw_response" type="hidden" value ="<%=@response%>">
       <input name="draw_id" type="hidden" value=<%=session.fetch("draw_id")%>>
-      <button>Continue</button>
+      <input name="draw_result" type="hidden" value=<%=@result%>>
+      <button class="btn btn-primary">Continue</button>
     </form>
 <%else%>
     <form action="/view_play_result">
        <input name="draw_present" value=1 type="hidden">
        <input name="draw_response" type="hidden" value ="<%=@response%>">
        <input name="draw_id" type="hidden"  value=<%=session.fetch("draw_id")%>>
-      <button>Continue</button>
+       <input name="draw_result" type="hidden" value=<%=@result%>>
+      <button class="btn btn-primary">Continue</button>
     </form>
 <%end%>
-<%session.store(:draw_result, @result)%>
+
+  </div>
 </div>
 
-  
+
+
+
+
+
+
