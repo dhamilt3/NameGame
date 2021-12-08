@@ -34,9 +34,9 @@
               <li class="list-group-item">Correct Answer: <%=@draw_solution%></li>
               <li class="list-group-item">
                   <%if @response.downcase.strip == @draw_solution.downcase.strip%>
-                    <%@result = 1 %> Correct
+                    <%@result = 1 %> <%=@correct_response%>
                   <%else%>
-                    <%@result = 0 %> Sorry, your answer was incorrect
+                    <%@result = 0 %> <%=@incorrect_response%>
                   <%end%>
                    <%session.store(:draw_result, @result)%>
               </li>
