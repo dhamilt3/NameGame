@@ -37,7 +37,7 @@
  <%if @current_user == nil%>  <%#show navbar layout partial%>
  
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">NameGame</a>
+  <a class="navbar-brand" href="/">NameGame</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -68,7 +68,7 @@
 
  <%else%> <%#show navbar layout 2%>
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">NameGame</a>
+  <a class="navbar-brand" href="/">NameGame</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -97,11 +97,11 @@
 <%#end of nav bar%>
 
 
-    <div>Current User 
-      <%=@current_user.inspect%>
+  <%#leaving this empty code if I need to trouble shoot more user fetch problems%>
+    <div>
+      <%@current_user.inspect%>
       <%if @current_user == nil %>
-      none
-      <%else%>
+           <%else%>
         <%@current_user%>
       <%end%>
     </div>

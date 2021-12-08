@@ -10,7 +10,6 @@ class PlaysController < ApplicationController
     session.store(:draw_result, nil)
     session.store(:draw_check, nil)
     session.store(:draw_ongoing, nil)
-
     session[:sample] = Array.new
 
     if session.fetch("play_id") == nil                  #if there is not a current play in session
@@ -34,7 +33,6 @@ class PlaysController < ApplicationController
     play_count = user_plays.count
     play_new = play_count
     session.store(:play_count, play_new)
-
 
     render({:template => "plays/new_play.html.erb"})
   end
