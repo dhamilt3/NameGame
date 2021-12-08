@@ -57,6 +57,20 @@ class DrawsController < ApplicationController
       session.store(:draw_id, the_draw.id)
       @draw_count = draw_count
 
+      #populate a draw prompt
+      prompt_array = [
+      "Who is this?",
+      "Look familiar?",
+      "Any guesses?",
+      "How about this one?",
+      "Do you know who this is?",
+      "Who is this?",
+      "Who is this?"      ]
+      @prompt = prompt_array.sample
+
+
+
+
       render({:template => "draws/new_draw.html.erb"})
 
     
