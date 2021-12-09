@@ -109,8 +109,8 @@
   
     <%if @current_user == nil%>
     <%#do nohting%>
-    <%else%>
-    <%#else%>          <%#NOTE__ I used this block of code for trouble shooting--i Want to leave it in, but am hiding it for now, rather than commenting out as an html.erb%>
+    <%elsif @current_user.present?%>
+    <%else%>          <%#NOTE__ I used this block of code for trouble shooting--i Want to leave it in, but am hiding it for now, rather than commenting out as an html.erb%>
       <div>User_id: <%=@current_user.id%></div>
       <div>Play:  <%=session.fetch("play_id")%></div>
       <div>Draw: <%=session.fetch("draw_number")%></div>
