@@ -27,8 +27,34 @@ class UserAuthenticationController < ApplicationController
   end
 
   def destroy_cookies
+    if session.fetch(:play_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
+      session.store(:play_ongoing, nil)     #delete the session cookie
+      redirect_to("/", { :notice => "Play abandoned - Signed out successfully." })
+
+    #destroy the abandoned play
+    the_id = session.fetch("play_id")
+    the_play = Play.where({ :id => the_id }).at(0)
+    play_id = the_play.id
+    the_play.destroy
+
+    #destory the abandoned draws
+    the_draws = Draw.all.where({:play_id => play_id})
+    the_draws.each do |draw|
+    draw.destroy
+    end
+
+    #destroy the session cookies
+    session.store(:play_ongoing, nil) 
+    session.store(:draw_ongoing, nil)    
+    session.store(:play_id, nil)
+    session.store(:draw_id, nil)
+    session.store(:draw_number, nil)
+      
+    else #run the entire play script uninterrupted
+
     reset_session
     redirect_to("/", { :notice => "Signed out successfully." })
+    end
   end
 
   def sign_up_form

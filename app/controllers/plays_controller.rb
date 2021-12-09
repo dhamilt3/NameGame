@@ -5,14 +5,24 @@ class PlaysController < ApplicationController
       session.store(:play_ongoing, nil)     #delete the session cookie
       redirect_to("/", { :alert => "Play abaonded."}) 
 
-      #destroy the abandoned play
-      the_id = session.fetch("play_id")
-      the_play = Play.where({ :id => the_id }).at(0)
-      the_play.destroy
+    #destroy the abandoned play
+    the_id = session.fetch("play_id")
+    the_play = Play.where({ :id => the_id }).at(0)
+    play_id = the_play.id
+    the_play.destroy
 
-      session.store(:play_id, nil)
-      session.store(:draw_id, nil)
-      session.store(:draw_number, nil)
+    #destory the abandoned draws
+    the_draws = Draw.all.where({:play_id => play_id})
+    the_draws.each do |draw|
+    draw.destroy
+    end
+
+    #destroy the session cookies
+    session.store(:play_ongoing, nil) 
+    session.store(:draw_ongoing, nil)    
+    session.store(:play_id, nil)
+    session.store(:draw_id, nil)
+    session.store(:draw_number, nil)
       
 
     else #run the entire play script uninterrupted
@@ -115,6 +125,33 @@ class PlaysController < ApplicationController
     if @current_user == nil
     redirect_to("/")      
     else # proceed with script    
+
+      if session.fetch(:play_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
+        session.store(:play_ongoing, nil)     #delete the session cookie
+        redirect_to("/user_plays/"+@current_user.id.to_s, { :alert => "Play abaonded."}) 
+  
+      #destroy the abandoned play
+      the_id = session.fetch("play_id")
+      the_play = Play.where({ :id => the_id }).at(0)
+      play_id = the_play.id
+      the_play.destroy
+  
+      #destory the abandoned draws
+      the_draws = Draw.all.where({:play_id => play_id})
+      the_draws.each do |draw|
+      draw.destroy
+      end
+  
+      #destroy the session cookies
+      session.store(:play_ongoing, nil) 
+      session.store(:draw_ongoing, nil)    
+      session.store(:play_id, nil)
+      session.store(:draw_id, nil)
+      session.store(:draw_number, nil)
+        
+  
+      else #run the entire play script uninterrupted
+    
   
         #this s a feature to prevent a user from seeing another user's plays
       @query_user = params.fetch("user").to_s
@@ -131,6 +168,7 @@ class PlaysController < ApplicationController
       end
     
     end
+  end
 
   end
 
