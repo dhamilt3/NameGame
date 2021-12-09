@@ -46,6 +46,18 @@ class DrawsController < ApplicationController
       the_draw.play_id = session.fetch("play_id")
       the_draw.save
 
+      roster_id = the_draw.roster_id    #retreive the current_draw id
+      the_member = Roster.all.where({:id => roster_id}).at(0)  #find the corresponding record
+      if the_member.draws_count == nil
+        the_member.draws_count = 1
+      else 
+      count = the_member.draws_count
+      count = count + 1
+      the_member.draws_count = count              #incrase the draw count
+      end
+      the_member.save
+
+
       session.store(:draw_ongoing, 1)  #indicate that the current draw is ongoing
       
       play_id = session.fetch("play_id")                  #extract the current_play from the session hash
@@ -55,7 +67,7 @@ class DrawsController < ApplicationController
       the_draw.play_id = session.fetch("play_id")         #set draw play_id
       the_draw.save                                       #save the changes
 
-      session.store(:draw_number, draw_count)
+       session.store(:draw_number, draw_count)
       session.store(:draw_id, the_draw.id)
       @draw_count = draw_count
 
@@ -72,12 +84,7 @@ class DrawsController < ApplicationController
     ]
       @prompt = prompt_array.sample
 
-
-
-
       render({:template => "draws/new_draw.html.erb"})
-
-    
   end
 
 
@@ -90,7 +97,7 @@ class DrawsController < ApplicationController
       current_draw = Draw.all.where({:id => @draw_id}).at(0)
       current_draw.name_attempt = @response
       current_draw.save
-
+                                            #sa
       draw_check = session.fetch("draw_number")
       session.store(:draw_check, draw_check)
       
