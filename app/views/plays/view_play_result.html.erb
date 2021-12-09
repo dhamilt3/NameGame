@@ -2,7 +2,7 @@
 <h3> Play Results <%=@play_id%></h3>
 
 
-<div class="card" style="width: 18rem;">
+<div class="card border-primary mb-3" style="width: 18rem;">
   <div class="card-header">
     Summary
   </div>
@@ -12,6 +12,12 @@
     <li class="list-group-item">Incorrect: <%=@incorrect_count.to_i%></li>
     <li class="list-group-item">Accuracy: <%=(@percent)%>%</li>
   </ul>
+</div>
+
+<div class="my-4">
+  <form action="/new_play">
+    <button class="btn btn-primary" autofocus>Play again</button>
+  </form>
 </div>
 
 <hr>

@@ -9,9 +9,13 @@
 
 <%#tart of the card%>
 
+<div class="mx-3">
 <div class="card">
+<div class="card-header">
+    <h4>Play <%=session.fetch("play_count")%></h4>
+</div>
   <div class="card-body">
-    <h5 class="card-title">Draw <%=session.fetch("draw_number")%> Result</h5>
+    <h6 class="card-title">Question <%=session.fetch("draw_number")%> Result</h6>
 
   <%#nesting the card withing the card header%>
 
@@ -85,6 +89,7 @@
 <%end%>
 
   </div>
+</div>
 </div>
 
 

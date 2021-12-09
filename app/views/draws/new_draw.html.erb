@@ -2,8 +2,11 @@
 <%#tart of the card%>
 
 <div class="card">
+<div class="card-header">
+    <h4>Play <%=session.fetch("play_count")%></h4>
+</div>
   <div class="card-body">
-    <h5 class="card-title">Play <%=session.fetch("play_count")%> - Question <%=@draw_count%>/5</h5>
+    <h6 class="card-title"> Question <%=@draw_count%> of 5</h6>
 
   <%#nesting the card withing the card header%>
 
