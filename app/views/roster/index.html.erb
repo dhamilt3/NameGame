@@ -82,10 +82,9 @@
 
 <div>
   <div>
-    <table border="1">
+    <table class="table" border="1">
       <tr>
-        <th>ID</th>
-        <th>Badge number</th>
+        <th scope="col">ID</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Preferred name</th>
@@ -93,16 +92,14 @@
         <th>Department</th>
         <th>Role</th>
         <th>Image</th>
-        <th>Draws count</th>
         <th>Created at</th>
         <th>Updated at</th>
         <th></th>
       </tr>
 
       <% @list_of_rosters.each do |a_roster| %>
-      <tr>
+      <tr scope="row">
         <td><%= a_roster.id %></td>
-        <td><%= a_roster.badge_number %></td>
         <td><%= a_roster.first_name %></td>
         <td><%= a_roster.last_name %></td>
         <td><%= a_roster.preferred_name %></td>
@@ -110,7 +107,6 @@
         <td><%= a_roster.department %></td>
         <td><%= a_roster.role %></td>
         <td><img src=<%=a_roster.image %>></td>
-        <td><%= a_roster.draws_count %></td>
         <td><%= time_ago_in_words(a_roster.created_at) %> ago</td>
         <td><%= time_ago_in_words(a_roster.updated_at) %> ago</td>
         <td><a href="/roster/<%= a_roster.id %>">Show details</a></td>
