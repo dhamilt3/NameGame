@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def home
     if @current_user == nil
-      redirect_to("/user_sign_in", { :notice => " Welcome - Please sign in" })
+      redirect_to("/user_sign_in")
     else
        render({:template => "misc/home.html.erb"})
     end
