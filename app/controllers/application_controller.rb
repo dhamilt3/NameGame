@@ -11,13 +11,13 @@ class ApplicationController < ActionController::Base
   
   def force_user_sign_in
     if @current_user == nil
-      redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
+      redirect_to("/user_sign_in", { :notice => "Please sign in first." })
     end
   end
 
   def home
     if @current_user == nil
-      redirect_to("/user_sign_in", { :notice => "Please sign in." })
+      redirect_to("/user_sign_in", { :notice => " Welcome - Please sign in" })
     else
        render({:template => "misc/home.html.erb"})
     end
