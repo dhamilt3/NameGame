@@ -1,8 +1,8 @@
-<div>
+<div class="mx-3">
   <div>
-    <h1>
+    <h3>
       Roster details:  <%= @the_roster.first_name %> <%= @the_roster.last_name %>
-    </h1>
+    </h3>
 
     <div>
       
@@ -36,9 +36,9 @@
       <%# </dd> %>
 
 
-      <dt>
-        Image
-      </dt>
+      <p>
+        Image:
+      </p>
       <dd>
         <img src="<%= @the_roster.image %>">
       </dd>
@@ -55,7 +55,7 @@
           <li class="list-group-item">Last Updated:  <%= time_ago_in_words(@the_roster.updated_at) %> ago</li>
 
         </ul>
-    <div>
+    <div class="my-2">
       <a href="/roster">Return to Roster </a>
     </div>
 
