@@ -64,7 +64,7 @@
       <input name="draw_response" type="hidden" value ="<%=@response%>">
       <input name="draw_id" type="hidden" value=<%=session.fetch("draw_id")%>>
       <input name="draw_result" type="hidden" value=<%=@result%>>
-      <button class="btn btn-primary">Continue</button>
+      <button class="btn btn-primary" autofocus>Continue</button>
     </form>
 <%elsif session.fetch("draw_number") <5%>
     <form action="/new_draw">
@@ -72,7 +72,7 @@
        <input name="draw_response" type="hidden" value ="<%=@response%>">
       <input name="draw_id" type="hidden" value=<%=session.fetch("draw_id")%>>
       <input name="draw_result" type="hidden" value=<%=@result%>>
-      <button class="btn btn-primary">Continue</button>
+      <button class="btn btn-primary" autofocus>Continue</button>
     </form>
 <%else%>
     <form action="/view_play_result">
@@ -80,7 +80,7 @@
        <input name="draw_response" type="hidden" value ="<%=@response%>">
        <input name="draw_id" type="hidden"  value=<%=session.fetch("draw_id")%>>
        <input name="draw_result" type="hidden" value=<%=@result%>>
-      <button class="btn btn-primary">Continue</button>
+      <button class="btn btn-primary" autofocus>Continue</button>
     </form>
 <%end%>
 

@@ -72,14 +72,14 @@
 
 <hr>
 
-<div>
+<div class="mx-3">
   <div>
     <h2>
       Edit roster
     </h2>
 
     <form action="/modify_roster/<%= @the_roster.id %>"  method="post" >
-      <div>
+      <div class="my-2">
         <label for="badge_number_box">
           Badge number
         </label>
@@ -87,7 +87,7 @@
         <input type="text"  class="form-control" id="badge_number_box" name="query_badge_number" value="<%= @the_roster.badge_number %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="first_name_box">
           First name
         </label>
@@ -95,7 +95,7 @@
         <input type="text"  class="form-control" id="first_name_box" name="query_first_name" value="<%= @the_roster.first_name %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="last_name_box">
           Last name
         </label>
@@ -103,37 +103,39 @@
         <input type="text" class="form-control" id="last_name_box" name="query_last_name" value="<%= @the_roster.last_name %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="preferred_name_box">Preferred name</label>
         <input type="text"  class="form-control" id="preferred_name_box" name="query_preferred_name" value="<%= @the_roster.preferred_name %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="shift_box">Shift</label>
         <input type="text"  class="form-control" id="shift_box" name="query_shift" value="<%= @the_roster.shift %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="department_box">Department</label>
         <input type="text"  class="form-control" id="department_box" name="query_department" value="<%= @the_roster.department %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="role_box">Role</label>
         <input type="text"  class="form-control" id="role_box" name="query_role" value="<%= @the_roster.role %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="image_box">Image</label>
         <input type="text"  class="form-control" id="image_box" name="query_image" value="<%= @the_roster.image %>">
       </div>
 
-      <div>
+      <div class="my-2">
         <label for="draws_count_box">Draws count</label>
         <input type="text" class="form-control" id="draws_count_box" name="query_draws_count" value="<%= @the_roster.draws_count %>">
       </div>
 
-      <button class="btn btn-primary">Update roster</button>
+      <div class="my-2">
+        <button class="btn btn-primary">Update roster</button>
+      </div>
     </form>
   </div>
 </div>

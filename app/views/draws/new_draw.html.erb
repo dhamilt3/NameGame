@@ -23,7 +23,7 @@
            <div class="mx-3">       
           <form action="/draw_result">
             <label for="query_answer">Name</label>
-            <input id="query_answer" placeholder="<%=@prompt%>" name="answer">
+            <input id="query_answer" placeholder="<%=@prompt%>" name="answer" autofocus>
             <input  id="query_draw_solution" type="hidden" value="<%=@roster_record.preferred_name%>" name="draw_solution">
             <input  id="query_draw_count" type="hidden" value="<%=@draw_count%>" name="draw_count">
             <input id="query_draw_id" type="hidden" value="<%=session.fetch("draw_id")%>" name="draw_id">
