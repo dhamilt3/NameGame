@@ -9,6 +9,10 @@ class PlaysController < ApplicationController
       the_id = session.fetch("play_id")
       the_play = Play.where({ :id => the_id }).at(0)
       the_play.destroy
+
+      session.store(:play_id, nil)
+      session.store(:draw_id, nil)
+      session.store(:draw_number, nil)
       
 
     else #run the entire play script uninterrupted
@@ -19,7 +23,6 @@ class PlaysController < ApplicationController
     session.store(:draw_number, nil)
     session.store(:draw_id, nil)
     session.store(:draw_result, nil)
-    session.store(:draw_check, nil)
     session.store(:draw_ongoing, nil)
     session.store(:play_ongoing, 1)
     session[:sample] = Array.new
@@ -48,6 +51,7 @@ class PlaysController < ApplicationController
     session.store(:play_count, play_new)
 
     render({:template => "plays/new_play.html.erb"})
+  end
   end
 
 
@@ -127,7 +131,7 @@ class PlaysController < ApplicationController
       end
     
     end
-  end #this is the end for the "if" statment of the cookie check
+
   end
 
 

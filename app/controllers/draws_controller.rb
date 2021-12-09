@@ -4,17 +4,27 @@ class DrawsController < ApplicationController
 
     if session.fetch(:draw_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
     
-      #destroy the abandoned play
+    #destroy the abandoned play
     the_id = session.fetch("play_id")
     the_play = Play.where({ :id => the_id }).at(0)
+    play_id = the_play.id
     the_play.destroy
 
-    redirect_to("/new_play", { :alert => "Play abaonded."})   
-    
+    #destory the abandoned draws
+    the_draws = Draw.all.where({:play_id => play_id})
+    the_draws.each do |draw|
+    draw.destroy
+    end
+
     session.store(:play_ongoing, nil) 
     session.store(:draw_ongoing, nil)     #delete the session cookie
+    session.store(:play_id, 1)
+    session.store(:draw_id, nil)
+    session.store(:draw_number, nil)
+
+    redirect_to("/", { :alert => "Play abandoned mid session"})   
     
-    else
+   else
 
 
       #create a new roster sample---------------------------
@@ -37,7 +47,7 @@ class DrawsController < ApplicationController
       @draw_result = session.fetch("draw_result").to_i     #extract the draw_result from the params hash
       last_draw.draw_result = @draw_result
       last_draw.save 
-    end    
+    end  
 
     #create the next draw
       the_draw = Draw.new                               #create a new draw
@@ -50,13 +60,14 @@ class DrawsController < ApplicationController
       the_member = Roster.all.where({:id => roster_id}).at(0)  #find the corresponding record
       if the_member.draws_count == nil
         the_member.draws_count = 1
+        the_member.save
       else 
-      count = the_member.draws_count
-      count = count + 1
-      the_member.draws_count = count              #incrase the draw count
+        count = the_member.draws_count
+        count = count + 1
+        the_member.draws_count = count              #incrase the draw count
+        the_member.save
       end
-      the_member.save
-
+     
 
       session.store(:draw_ongoing, 1)  #indicate that the current draw is ongoing
       
@@ -67,7 +78,7 @@ class DrawsController < ApplicationController
       the_draw.play_id = session.fetch("play_id")         #set draw play_id
       the_draw.save                                       #save the changes
 
-       session.store(:draw_number, draw_count)
+      session.store(:draw_number, draw_count)
       session.store(:draw_id, the_draw.id)
       @draw_count = draw_count
 
@@ -85,6 +96,7 @@ class DrawsController < ApplicationController
       @prompt = prompt_array.sample
 
       render({:template => "draws/new_draw.html.erb"})
+    end
   end
 
 
@@ -97,9 +109,6 @@ class DrawsController < ApplicationController
       current_draw = Draw.all.where({:id => @draw_id}).at(0)
       current_draw.name_attempt = @response
       current_draw.save
-                                            #sa
-      draw_check = session.fetch("draw_number")
-      session.store(:draw_check, draw_check)
       
       play_id = session.fetch("play_id")                  #extract the current_play from the session hash
       the_draws = Draw.all.where({:play_id => play_id})   #return an array of draws for the most recent play
@@ -148,6 +157,7 @@ class DrawsController < ApplicationController
         #this s a feature to prevent a user from seeing another user's plays
         @play = params.fetch("play")
         the_play = Play.all.where({:id => @play}).first
+
         @play_user = the_play.user_id.to_s
         @user = @current_user.id.to_s
 
@@ -155,7 +165,6 @@ class DrawsController < ApplicationController
 
         @draw_set = Draw.all.where({:play_id => @play}).order(:id => :desc)
 
-        
         render({:template => "draws/play_history.html.erb"}) 
 
         else    #else, redirect to valid user's pages
@@ -221,6 +230,6 @@ class DrawsController < ApplicationController
     #   redirect_to("/draws", { :notice => "Draw deleted successfully."} )
     # end
 
-  end #this is the end of the "if" statment from the very beginning
+  
   end
 
