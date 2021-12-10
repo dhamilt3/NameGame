@@ -3,7 +3,7 @@ class PlaysController < ApplicationController
   def new_play
     if session.fetch(:play_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
       session.store(:play_ongoing, nil)     #delete the session cookie
-      redirect_to("/", { :alert => "Play abaonded."}) 
+      redirect_to("/", { :alert => "Play abandoned."}) 
 
     #destroy the abandoned play
     the_id = session.fetch("play_id")
@@ -48,7 +48,7 @@ class PlaysController < ApplicationController
       the_play = Play.new
       the_play.user_id = @current_user.id
       the_play.save
-      @current_play = the_play.id                       #create an ainstance variable of the current play id
+      @current_play = the_play.id                       #create an instance variable of the current play id
       session.store(:play_id, @current_play)  
       the_play_id =  session.fetch("play_id")
       the_play = Play.all.where({:id => the_play_id}).at(0)
@@ -128,7 +128,7 @@ class PlaysController < ApplicationController
 
       if session.fetch(:play_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
         session.store(:play_ongoing, nil)     #delete the session cookie
-        redirect_to("/user_plays/"+@current_user.id.to_s, { :alert => "Play abaonded."}) 
+        redirect_to("/user_plays/"+@current_user.id.to_s, { :alert => "Play abandoned."}) 
   
       #destroy the abandoned play
       the_id = session.fetch("play_id")

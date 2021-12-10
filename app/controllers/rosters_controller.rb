@@ -2,7 +2,7 @@ class RostersController < ApplicationController
   def index
     if session.fetch(:play_ongoing) == 1    #check to see if a new_draw is in process and unresolved, if so this new_draw will do nothing, otherwise, it will run the entire new_draw controller
       session.store(:play_ongoing, nil)     #delete the session cookie
-      redirect_to("/roster", { :alert => "Play abaonded."}) 
+      redirect_to("/roster", { :alert => "Play abandoned."}) 
 
     #destroy the abandoned play
     the_id = session.fetch("play_id")
